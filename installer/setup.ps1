@@ -56,7 +56,7 @@ $language.Add_DrawItem({
 })
 $launch=New-Object Windows.Forms.CheckBox;$launch.SetBounds(26,260,660,30);$launch.Visible=$false;$launch.Checked=$false;$form.Controls.Add($launch)
 $launchMode=New-Object Windows.Forms.ComboBox;$launchMode.DropDownStyle='DropDownList';$launchMode.SetBounds(48,300,520,32);$launchMode.Visible=$false;$form.Controls.Add($launchMode)
-$script:complete=$false;$script:selectedOBS=$null;$script:backup=$null
+$script:complete=$false;$script:selectedOBS=$null;$script:backup=$null;$script:portableInstall=$false
 $script:steamAvailable=Test-Path -LiteralPath 'Registry::HKEY_CLASSES_ROOT\steam\shell\open\command'
 function Update-Text {
  $heading.Text=if($script:complete){L 'DoneHeading'}else{L 'Heading'}
@@ -79,7 +79,7 @@ $language.Add_SelectedIndexChanged({$script:LanguageCode=$codes[$language.Select
 $launchMode.Enabled=$false;$launch.Add_CheckedChanged({$launchMode.Enabled=$launch.Checked})
 $cancel.Add_Click({
  if($script:complete -and $launch.Checked){
-  try{Start-VisorOBS $script:selectedOBS ($launchMode.SelectedIndex -eq 1)}
+  try{Start-VisorOBS $script:selectedOBS ($launchMode.SelectedIndex -eq 1) $script:portableInstall}
   catch{[void][Windows.Forms.MessageBox]::Show((L 'LaunchError'),'ASCII VISOR','OK','Information');return}
  }
  $form.Close()
@@ -106,6 +106,7 @@ $install.Add_Click({
   $install.Enabled=$false
   $script:backup=Install-VisorPackage $work $base $isPortable
   $script:selectedOBS=$obsExe
+  $script:portableInstall=$isPortable
   Show-Finish
  }catch{$install.Enabled=$true;[void][Windows.Forms.MessageBox]::Show((L 'InstallerError')+"`n"+$_.Exception.Message,'ASCII VISOR','OK','Error')}
 })
