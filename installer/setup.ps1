@@ -1,13 +1,19 @@
-﻿param([string]$Bundle,[string]$PreviewPath)
+﻿param([string]$Bundle,[string]$PreviewPath,[switch]$SelfTest)
 $ErrorActionPreference='Stop'
+$env:PSModulePath=Join-Path $PSHOME 'Modules'
 . (Join-Path $PSScriptRoot 'install-engine.ps1')
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
 $ru=[Globalization.CultureInfo]::CurrentUICulture.Name.StartsWith('ru')
 function T([string]$Russian,[string]$English){if($ru){return $Russian}else{return $English}}
+Start-Transcript -LiteralPath (Join-Path $PSScriptRoot 'startup.log') -Force | Out-Null
 $work=Join-Path $PSScriptRoot ('extracted-'+[Guid]::NewGuid().ToString('N'))
-try {Expand-Archive -LiteralPath $Bundle -DestinationPath $work; Test-VisorPayload $work} catch {
+try {
+ Add-Type -AssemblyName System.IO.Compression.FileSystem
+ [IO.Compression.ZipFile]::ExtractToDirectory($Bundle,$work)
+ Test-VisorPayload $work
+} catch {
  [void][Windows.Forms.MessageBox]::Show($_.Exception.Message,'ASCII VISOR'); exit 1
 }
 $form=New-Object Windows.Forms.Form
@@ -86,9 +92,22 @@ $install.Add_Click({
   $form.Close()
  } catch { $install.Enabled=$true;[void][Windows.Forms.MessageBox]::Show($_.Exception.Message,'ASCII VISOR','OK','Error') }
 })
-if($PreviewPath){
+if($SelfTest){
+ Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public static class VisorWindowTest { [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr hWnd); }'
+ $timer=New-Object Windows.Forms.Timer
+ $timer.Interval=1500
+ $timer.Add_Tick({
+  $timer.Stop()
+  $visible=[VisorWindowTest]::IsWindowVisible($form.Handle)
+  [pscustomobject]@{visible=$visible;title=$form.Text;handle=$form.Handle.ToInt64()} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'startup-test.json') -Encoding UTF8
+  $form.Close()
+ })
+ $form.Add_Shown({$timer.Start()})
+ [void]$form.ShowDialog()
+}elseif($PreviewPath){
  $form.Show();$form.Refresh()
  $bitmap=New-Object Drawing.Bitmap($form.Width,$form.Height)
  $form.DrawToBitmap($bitmap,(New-Object Drawing.Rectangle(0,0,$form.Width,$form.Height)))
  $bitmap.Save($PreviewPath,[Drawing.Imaging.ImageFormat]::Png);$bitmap.Dispose();$form.Close()
 }else{[void]$form.ShowDialog()}
+Stop-Transcript | Out-Null

@@ -16,7 +16,7 @@ static BOOL extract_resource(int id,const wchar_t *path) {
  CloseHandle(file);return result && written==length;
 }
 int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,LPWSTR command,int show) {
- (void)instance;(void)previous;(void)command;(void)show;
+ (void)instance;(void)previous;(void)show;
  wchar_t temp[MAX_PATH],folder[MAX_PATH],script[MAX_PATH],engine[MAX_PATH],bundle[MAX_PATH],system[MAX_PATH],exe[MAX_PATH],line[2048];
  if(!GetTempPathW(MAX_PATH,temp)||!GetTempFileNameW(temp,L"AVS",0,folder))return 1;
  DeleteFileW(folder);
@@ -29,8 +29,9 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,LPWSTR command,int sho
  }
  GetSystemDirectoryW(system,MAX_PATH);
  swprintf(exe,MAX_PATH,L"%ls\\WindowsPowerShell\\v1.0\\powershell.exe",system);
- swprintf(line,2048,L"\"%ls\" -NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File \"%ls\" -Bundle \"%ls\"",exe,script,bundle);
- STARTUPINFOW startup={0};startup.cb=sizeof(startup);startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
+ swprintf(line,2048,L"\"%ls\" -NoProfile -STA -ExecutionPolicy Bypass -File \"%ls\" -Bundle \"%ls\"%ls",exe,script,bundle,wcsstr(command,L"--self-test")?L" -SelfTest":L"");
+ /* CREATE_NO_WINDOW suppresses the console; do not hide the first GUI window. */
+ STARTUPINFOW startup={0};startup.cb=sizeof(startup);
  PROCESS_INFORMATION process={0};
  if(!CreateProcessW(exe,line,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,folder,&startup,&process)) {
   MessageBoxW(NULL,L"Cannot start the installer interface.",L"ASCII VISOR",MB_ICONERROR);return 3;
@@ -38,6 +39,7 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,LPWSTR command,int sho
  WaitForSingleObject(process.hProcess,INFINITE);
  DWORD code=1;GetExitCodeProcess(process.hProcess,&code);
  CloseHandle(process.hThread);CloseHandle(process.hProcess);
+ if(code!=0)MessageBoxW(NULL,L"Installer startup failed. Temporary files are retained in your TEMP folder (AVS*.tmp).",L"ASCII VISOR",MB_ICONERROR);
  /* Retain the uniquely named temporary directory for diagnostics; no recursive deletion. */
  return (int)code;
 }

@@ -1,6 +1,13 @@
 ﻿Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+function Get-VisorSHA256([string]$Path) {
+ $stream=[IO.File]::OpenRead($Path)
+ $algorithm=[Security.Cryptography.SHA256]::Create()
+ try {return [BitConverter]::ToString($algorithm.ComputeHash($stream)).Replace('-','')}
+ finally {$stream.Dispose();$algorithm.Dispose()}
+}
+
 function Assert-VisorTarget([string]$Target,[string]$Base) {
  $resolved=[IO.Path]::GetFullPath($Target).TrimEnd('\')
  $parent=[IO.Path]::GetFullPath($Base).TrimEnd('\')
@@ -15,7 +22,7 @@ function Test-VisorPayload([string]$Payload) {
  foreach($file in $manifest.files) {
   $path=Assert-VisorTarget (Join-Path $Payload $file.path) $Payload
   if (!(Test-Path -LiteralPath $path -PathType Leaf)) {throw "Missing package file: $($file.path)"}
-  if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne $file.sha256) {throw "Damaged package file: $($file.path)"}
+  if ((Get-VisorSHA256 $path) -ne $file.sha256) {throw "Damaged package file: $($file.path)"}
  }
  $actual=@(Get-ChildItem -LiteralPath (Join-Path $Payload 'ascii-visor') -File -Recurse)
  if($actual.Count -ne @($manifest.files).Count){throw 'Unexpected package files.'}
