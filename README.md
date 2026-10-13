@@ -46,3 +46,23 @@ The plugin is free and open source. If you enjoy it, you can [support TRIPCHILLE
 ## License
 
 GPL-2.0-or-later. Bundled fonts use SIL Open Font License; see [THIRD_PARTY.md](THIRD_PARTY.md) and `data/fonts`. This is a community plugin and is not an official OBS Project product.
+
+
+https://github.com/user-attachments/assets/067aa13c-cada-4ff3-859d-4025b0b72c82
+
+
+
+https://github.com/user-attachments/assets/8ed8da50-d899-492f-a81a-4ccff01a9210
+
+
+
+https://github.com/user-attachments/assets/30c21fb0-9aad-4652-9b45-b2c97a04a234
+
+
+
+https://github.com/user-attachments/assets/772cb41e-769f-432c-b734-f8f910bb3957
+
+
+
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
