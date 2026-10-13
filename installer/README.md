@@ -23,3 +23,10 @@ Pass -CompilerRoot if the portable compiler is in another location. The builder 
 ## Verification
 
 The installation engine was tested in new isolated directories: fresh standard and portable layouts, backup preservation, user-settings preservation, rollback, corrupted-package rejection, path containment and OBS version recognition. The Windows PowerShell 5.1 interface was rendered and inspected. The author confirmed both upgrade and clean installation with the previous two-language build in ordinary and Steam OBS 32.2.2. R3 adds ten languages, flags, translated credits and an optional launch choice on the finish screen. Its native window launch, language completeness, initial/finish layouts and installation engine have been checked; a user run of R3 and its optional OBS/Steam launch remain to be confirmed.
+
+
+## Branding (R4)
+
+The installer executable and window use TRIPCHILLER's supplied vector logo. A derived icon adds a dark rounded tile and inset spacing so the white mark remains visible on light backgrounds. The ICO contains 16, 20, 24, 32, 40, 48, 64, 128 and 256 pixel sizes. Original-logo.svg is an unchanged copy; installer-icon.svg contains the derived backing tile. The prebuilt ICO is included, so compiling the installer does not require a graphics application.
+
+R3 upgrade, clean installation and optional ordinary/Steam launch were confirmed by the author. R4 changes the installer icon and window branding; its native window and embedded icon have been verified.

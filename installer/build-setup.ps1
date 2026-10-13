@@ -1,5 +1,6 @@
 param([string]$CompilerRoot='',[string]$PluginRoot='')
 $ErrorActionPreference='Stop'
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'branding/installer.ico') -Destination (Join-Path $PSScriptRoot 'installer.ico') -Force
 if(!$PluginRoot){$PluginRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))}
 if(!$CompilerRoot){$CompilerRoot=Join-Path $PluginRoot 'tools/llvm-mingw-20261006-ucrt-x86_64/bin'}
 if(!(Test-Path -LiteralPath (Join-Path $PluginRoot 'build/ascii-visor.dll'))){throw 'Build the plugin first or pass PluginRoot.'}

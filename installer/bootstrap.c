@@ -27,10 +27,11 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,LPWSTR command,int sho
  if(!extract_resource(101,script)||!extract_resource(102,engine)||!extract_resource(103,bundle)) {
   MessageBoxW(NULL,L"Cannot extract the installer files.",L"ASCII VISOR",MB_ICONERROR);return 2;
  }
- const wchar_t *extras[]={L"locales.json",L"flags.cs",L"launch-obs.ps1"};
- for(int i=0;i<3;i++) {
+ const wchar_t *extras[]={L"locales.json",L"flags.cs",L"launch-obs.ps1",L"installer.ico"};
+ const int extra_ids[]={104,105,106,108};
+ for(int i=0;i<4;i++) {
   wchar_t path[MAX_PATH];swprintf(path,MAX_PATH,L"%ls\\%ls",folder,extras[i]);
-  if(!extract_resource(104+i,path)){MessageBoxW(NULL,L"Cannot extract installer language files.",L"ASCII VISOR",MB_ICONERROR);return 2;}
+  if(!extract_resource(extra_ids[i],path)){MessageBoxW(NULL,L"Cannot extract installer interface files.",L"ASCII VISOR",MB_ICONERROR);return 2;}
  }
  GetSystemDirectoryW(system,MAX_PATH);
  swprintf(exe,MAX_PATH,L"%ls\\WindowsPowerShell\\v1.0\\powershell.exe",system);

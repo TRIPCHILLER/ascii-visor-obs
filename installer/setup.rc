@@ -5,4 +5,6 @@
 104 RCDATA "locales.json"
 105 RCDATA "flags.cs"
 106 RCDATA "launch-obs.ps1"
+107 ICON "branding/installer.ico"
+108 RCDATA "branding/installer.ico"
 1 RT_MANIFEST "setup.manifest"

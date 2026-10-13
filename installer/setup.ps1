@@ -23,7 +23,8 @@ $work=Join-Path $PSScriptRoot ('extracted-'+[Guid]::NewGuid().ToString('N'))
 try{Add-Type -AssemblyName System.IO.Compression.FileSystem;[IO.Compression.ZipFile]::ExtractToDirectory($Bundle,$work);Test-VisorPayload $work}
 catch{[void][Windows.Forms.MessageBox]::Show((L 'InstallerError')+"`n"+$_.Exception.Message,'ASCII VISOR');exit 1}
 $form=New-Object Windows.Forms.Form
-$form.Text='ASCII VISOR · OBS Edition 0.2.6 · Setup R3'
+$form.Text='ASCII VISOR · OBS Edition 0.2.6 · Setup R4'
+$form.Icon=New-Object Drawing.Icon((Join-Path $PSScriptRoot 'installer.ico'))
 $form.ClientSize=New-Object Drawing.Size(720,470)
 $form.StartPosition='CenterScreen';$form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false
 $form.Font=New-Object Drawing.Font('Segoe UI',10)
