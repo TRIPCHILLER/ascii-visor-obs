@@ -10,7 +10,7 @@
 
 <p align="center"><b>Windows x64 · 已在 <a href="https://obsproject.com/">OBS Studio</a> 32.2.2 测试 · 普通版与 Steam 版 · 免费</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ 下载安装程序</b></a> · <a href="#quick-start">🚀 快速开始</a> · <a href="https://boosty.to/tripchiller">☕ 支持作者</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ 下载安装程序</b></a> · <a href="#-快速开始">🚀 快速开始</a> · <a href="https://boosty.to/tripchiller">☕ 支持作者</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 

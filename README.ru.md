@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ Скачать установщик</b></a> ·
-  <a href="#quick-start">🚀 Быстрый старт</a> ·
+  <a href="#-быстрый-старт">🚀 Быстрый старт</a> ·
   <a href="https://boosty.to/tripchiller">☕ Поддержать автора</a>
 </p>
 
