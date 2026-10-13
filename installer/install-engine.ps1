@@ -18,7 +18,7 @@ function Assert-VisorTarget([string]$Target,[string]$Base) {
 
 function Test-VisorPayload([string]$Payload) {
  $manifest=Get-Content -LiteralPath (Join-Path $Payload 'manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
- if ($manifest.version -ne '0.2.7') {throw 'Unexpected package version.'}
+ if ($manifest.version -ne '0.2.8') {throw 'Unexpected package version.'}
  foreach($file in $manifest.files) {
   $path=Assert-VisorTarget (Join-Path $Payload $file.path) $Payload
   if (!(Test-Path -LiteralPath $path -PathType Leaf)) {throw "Missing package file: $($file.path)"}

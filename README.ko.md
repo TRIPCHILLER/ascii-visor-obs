@@ -10,13 +10,15 @@
 
 <p align="center"><b>Windows x64 · <a href="https://obsproject.com/">OBS Studio</a> 32.2.2에서 검증 · 일반 및 Steam 버전 · 무료</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ 설치 프로그램 다운로드</b></a> · <a href="#-빠른-시작">🚀 빠른 시작</a> · <a href="https://boosty.to/tripchiller">☕ 제작자 후원</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ 설치 프로그램 다운로드</b></a> · <a href="#-빠른-시작">🚀 빠른 시작</a> · <a href="https://boosty.to/tripchiller">☕ 제작자 후원</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
 **ASCII ⛶ VISOR**는 웹캠이나 다른 영상 소스를 실시간 ASCII 아트로 바꾸는 [OBS Studio](https://obsproject.com/)용 영상 필터 플러그인입니다. 문자, 색상, 밀도를 선택하고 장면에 맞게 화면을 조절하세요. 결과가 미리보기에 바로 나타나며 녹화와 방송에도 적용됩니다.
 
 개성 있는 카메라 화면, 창의적인 방송, 음악 공연, 영상 실험에 활용하세요.
+
+ASCII 아바타는 VTuber 스타일의 방송 표현을 위한 또 다른 선택지입니다. 일반적인 웹캠 화면 대신 스타일화된 모습을 보여 주면서 움직임과 반응을 실시간으로 전달할 수 있습니다. 시각적인 프라이버시를 어느 정도 지킬 수 있지만 익명성을 보장하지는 않습니다. 목소리, 실루엣, 화면 속 세부 요소로 알아볼 수 있습니다.
 
 ## ✨ 주요 기능
 
@@ -58,13 +60,15 @@ https://github.com/user-attachments/assets/772cb41e-769f-432c-b734-f8f910bb3957
 
 투명 배경에서는 문자 사이로 게임, 영상, 다른 소스가 보입니다. ASCII 카메라를 방송 화면에 자연스럽게 배치할 수 있습니다.
 
-문자 사이의 빈 공간을 투명하게 만드는 기능이며 사람과 방을 자동으로 분리하지는 않습니다. 겹치기 시연 영상은 추후 추가합니다.
+투명해지는 부분은 문자 사이의 공간입니다. 사람과 방 배경을 자동으로 분리하는 기능은 아닙니다.
+
+https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 <a name="quick-start"></a>
 
 ## 🚀 빠른 시작
 
-1. 위 링크 또는 릴리스의 **Assets**에서 **ASCII-VISOR-0.2.7-Setup.exe**를 다운로드하세요.
+1. 위 링크 또는 릴리스의 **Assets**에서 **ASCII-VISOR-0.2.8-Setup.exe**를 다운로드하세요.
 2. OBS 창을 모두 닫고 설치 프로그램을 실행하세요.
 3. **일반 OBS / Steam — 공통 설치**를 선택하세요. 포터블 OBS는 해당 옵션과 폴더를 선택하세요.
 4. OBS를 열고 카메라나 다른 영상 소스를 선택하세요.
@@ -79,10 +83,10 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 
 | 파일 | 용도 |
 |---|---|
-| **[ASCII-VISOR-0.2.7-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ASCII-VISOR-0.2.7-Setup.exe)** | 권장. 일반, Steam, 포터블 OBS에 설치하고 필요한 폴더를 자동으로 만듭니다. |
-| **[ascii-visor-0.2.7-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-windows-x64.zip)** | 일반 및 Steam OBS 수동 설치용. |
-| **[ascii-visor-0.2.7-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-portable.zip)** | 포터블 OBS 수동 설치용. |
-| **[ascii-visor-0.2.7-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-source.zip)** | 개발자용 소스 코드. 플러그인 사용에는 필요하지 않습니다. |
+| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | 권장. 일반, Steam, 포터블 OBS에 설치하고 필요한 폴더를 자동으로 만듭니다. |
+| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | 일반 및 Steam OBS 수동 설치용. |
+| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | 포터블 OBS 수동 설치용. |
+| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | 개발자용 소스 코드. 플러그인 사용에는 필요하지 않습니다. |
 
 수동 설치, 업데이트, 제거: [INSTALL.md](INSTALL.md).
 

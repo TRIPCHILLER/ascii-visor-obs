@@ -28,3 +28,8 @@ if (Test-Path "$root/tests/locale-smoke.c") {
  & "$compiler/clang.exe" -std=c11 -O2 -Wall -Wextra "-I$sdk" "-I$root/sdk-config" "$root/tests/locale-smoke.c" "$build/libobs.a" -o "$build/locale-smoke.exe"
  if ($LASTEXITCODE) { throw 'Localization test compilation failed' }
 }
+
+if (Test-Path "$root/tests/scene-transparency.c") {
+ & "$compiler/clang.exe" -std=c11 -O2 -Wall -Wextra "-I$sdk" "-I$root/sdk-config" "$root/tests/scene-transparency.c" "$build/libobs.a" -lole32 -o "$build/scene-transparency.exe"
+ if ($LASTEXITCODE) { throw 'Scene transparency test compilation failed' }
+}

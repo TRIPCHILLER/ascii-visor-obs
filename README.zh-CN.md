@@ -10,13 +10,15 @@
 
 <p align="center"><b>Windows x64 · 已在 <a href="https://obsproject.com/">OBS Studio</a> 32.2.2 测试 · 普通版与 Steam 版 · 免费</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ 下载安装程序</b></a> · <a href="#-快速开始">🚀 快速开始</a> · <a href="https://boosty.to/tripchiller">☕ 支持作者</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ 下载安装程序</b></a> · <a href="#-快速开始">🚀 快速开始</a> · <a href="https://boosty.to/tripchiller">☕ 支持作者</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
 **ASCII ⛶ VISOR** 是 [OBS Studio](https://obsproject.com/) 的视频滤镜插件，可将摄像头或其他视频源实时转换成 ASCII 图像。选择字符、调整颜色和密度，让画面融入你的场景。效果会立即显示在预览中，并应用于录制或直播。
 
 适用于个性化摄像头画面、创意直播、音乐演出和视频实验。
+
+ASCII 头像也是一种类似 VTuber 的出镜方式：用风格化形象代替普通摄像头画面，同时保留实时动作和反应。它能提供一定的视觉隐私，但不保证匿名性：声音、轮廓和画面细节仍可能让人认出你。
 
 ## ✨ 主要功能
 
@@ -58,13 +60,15 @@ https://github.com/user-attachments/assets/772cb41e-769f-432c-b734-f8f910bb3957
 
 启用透明背景后，字符间隙可显示游戏、视频或其他场景源。将 ASCII 摄像头画面融入直播布局。
 
-透明的是字符之间的空隙，不会自动将人物与房间分离。叠加演示将后续添加。
+透明的是字符之间的空隙，并不会自动把人物与房间背景分离。
+
+https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 <a name="quick-start"></a>
 
 ## 🚀 快速开始
 
-1. 点击上方下载链接，或在发布页的 **Assets** 中下载 **ASCII-VISOR-0.2.7-Setup.exe**。
+1. 点击上方下载链接，或在发布页的 **Assets** 中下载 **ASCII-VISOR-0.2.8-Setup.exe**。
 2. 关闭所有 OBS 窗口，运行安装程序。
 3. 选择**普通 OBS / Steam — 共用安装**。便携版请选择对应选项和文件夹。
 4. 打开 OBS，选择摄像头或其他视频源。
@@ -79,10 +83,10 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 
 | 文件 | 用途 |
 |---|---|
-| **[ASCII-VISOR-0.2.7-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ASCII-VISOR-0.2.7-Setup.exe)** | 推荐。支持普通版、Steam版和便携版，并自动创建所需文件夹。 |
-| **[ascii-visor-0.2.7-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-windows-x64.zip)** | 普通版和Steam版的手动安装包。 |
-| **[ascii-visor-0.2.7-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-portable.zip)** | 便携版的手动安装包。 |
-| **[ascii-visor-0.2.7-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-source.zip)** | 开发者使用的源代码，使用插件不需要下载。 |
+| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | 推荐。支持普通版、Steam版和便携版，并自动创建所需文件夹。 |
+| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | 普通版和Steam版的手动安装包。 |
+| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | 便携版的手动安装包。 |
+| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | 开发者使用的源代码，使用插件不需要下载。 |
 
 手动安装、更新和卸载：[INSTALL.md](INSTALL.md)。
 

@@ -280,8 +280,12 @@ static obs_properties_t *properties(void *data) {
 static void set_float(gs_effect_t *e,const char *name,float x) {gs_effect_set_float(gs_effect_get_param_by_name(e,name),x);}
 static void present(struct visor *v,uint32_t w,uint32_t h){
  gs_texture_t *texture=gs_texrender_get_texture(v->output);if(!texture)return;
+ /* The output shader produces premultiplied RGBA. Composite it over the
+    scene instead of copying transparent pixels over the destination. */
+ gs_blend_state_push();gs_blend_function(GS_BLEND_ONE,GS_BLEND_INVSRCALPHA);
  gs_effect_t *e=obs_get_base_effect(OBS_EFFECT_DEFAULT);gs_effect_set_texture(gs_effect_get_param_by_name(e,"image"),texture);
  while(gs_effect_loop(e,"Draw"))gs_draw_sprite(texture,0,w,h);
+ gs_blend_state_pop();
 }
 static void render(void *data,gs_effect_t *unused) {
  (void)unused;struct visor *v=data;obs_source_t *target=obs_filter_get_target(v->source);
@@ -336,8 +340,8 @@ static void render(void *data,gs_effect_t *unused) {
  while(gs_effect_loop(v->effect,"Draw"))gs_draw_sprite(NULL,0,w,h);
  gs_texrender_end(v->output);v->output_w=w;v->output_h=h;
  v->next_frame=v->fps?now+1000000000ULL/v->fps:0;
- present(v,w,h);
  gs_blend_state_pop();
+ present(v,w,h);
 }
 static struct obs_source_info info={.id="ascii_visor_filter",.type=OBS_SOURCE_TYPE_FILTER,.output_flags=OBS_SOURCE_VIDEO,
  .get_name=get_name,.create=create,.destroy=destroy,.update=update,.get_defaults=defaults,.get_properties=properties,.video_render=render};
@@ -345,7 +349,7 @@ bool obs_module_load(void) {
  const char *names[]={"fonts/BetterVCR.ttf","fonts/NotoSansMonoCJKjp-Regular.otf"};
  for(int i=0;i<2;i++){char *p=obs_module_file(names[i]);if(p){MultiByteToWideChar(CP_UTF8,0,p,-1,font_paths[i],MAX_PATH);
   if(!AddFontResourceExW(font_paths[i],FR_PRIVATE,NULL))blog(LOG_WARNING,"[ASCII VISOR] Cannot load private font %s",p);bfree(p);}}
- obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.7 registered");return true;
+ obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.8 registered");return true;
 }
 void obs_module_unload(void) {for(int i=0;i<2;i++)if(font_paths[i][0])RemoveFontResourceExW(font_paths[i],FR_PRIVATE,NULL);}
 const char *obs_module_name(void){return "ASCII VISOR — OBS EDITION";}

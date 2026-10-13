@@ -10,13 +10,15 @@
 
 <p align="center"><b>Windows x64 · <a href="https://obsproject.com/">OBS Studio</a> 32.2.2で検証済み · 通常版・Steam版 · 無料</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ インストーラーをダウンロード</b></a> · <a href="#-クイックスタート">🚀 クイックスタート</a> · <a href="https://boosty.to/tripchiller">☕ 作者を支援</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ インストーラーをダウンロード</b></a> · <a href="#-クイックスタート">🚀 クイックスタート</a> · <a href="https://boosty.to/tripchiller">☕ 作者を支援</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
 **ASCII ⛶ VISOR**は、Webカメラや他の映像ソースをリアルタイムでASCIIアートに変換する[OBS Studio](https://obsproject.com/)用映像フィルタープラグインです。文字、色、密度を選び、シーンに合う見た目に調整できます。変更はすぐにプレビューに反映され、録画や配信にも適用されます。
 
 個性的なカメラ演出、クリエイティブな配信、音楽ライブ、映像実験に。
+
+ASCIIアバターは、VTuber風の配信表現の選択肢にもなります。通常のカメラ映像の代わりに様式化した姿を表示しながら、動きやリアクションをリアルタイムで伝えられます。見た目のプライバシーをある程度保てますが、匿名性を保証するものではありません。声、シルエット、画面内の細部から本人が分かる場合があります。
 
 ## ✨ 機能
 
@@ -58,13 +60,15 @@ https://github.com/user-attachments/assets/772cb41e-769f-432c-b734-f8f910bb3957
 
 透明背景では、文字の隙間からゲーム、動画、他のソースが見えます。ASCIIカメラを配信のレイアウトに重ねられます。
 
-透明になるのは文字の隙間です。人物と部屋を自動的に切り分ける機能ではありません。重ね合わせのデモは後日追加します。
+透明になるのは文字の間の部分です。人物と部屋の背景を自動で分離する機能ではありません。
+
+https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 <a name="quick-start"></a>
 
 ## 🚀 クイックスタート
 
-1. 上のリンク、またはリリースページの**Assets**から**ASCII-VISOR-0.2.7-Setup.exe**をダウンロードします。
+1. 上のリンク、またはリリースページの**Assets**から**ASCII-VISOR-0.2.8-Setup.exe**をダウンロードします。
 2. OBSのウィンドウをすべて閉じ、インストーラーを実行します。
 3. **通常版OBS / Steam — 共通インストール**を選びます。ポータブル版では専用の項目とフォルダーを選択します。
 4. OBSを開き、カメラや他の映像ソースを選択します。
@@ -79,10 +83,10 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 
 | ファイル | 用途 |
 |---|---|
-| **[ASCII-VISOR-0.2.7-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ASCII-VISOR-0.2.7-Setup.exe)** | 推奨。通常版・Steam版・ポータブル版に対応し、必要なフォルダーを自動作成。 |
-| **[ascii-visor-0.2.7-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-windows-x64.zip)** | 通常版・Steam版の手動インストール用。 |
-| **[ascii-visor-0.2.7-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-portable.zip)** | ポータブル版の手動インストール用。 |
-| **[ascii-visor-0.2.7-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-source.zip)** | 開発者向けソースコード。利用には不要。 |
+| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | 推奨。通常版・Steam版・ポータブル版に対応し、必要なフォルダーを自動作成。 |
+| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | 通常版・Steam版の手動インストール用。 |
+| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | ポータブル版の手動インストール用。 |
+| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | 開発者向けソースコード。利用には不要。 |
 
 手動インストール、更新、削除：[INSTALL.md](INSTALL.md)。
 

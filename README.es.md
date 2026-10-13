@@ -10,13 +10,15 @@
 
 <p align="center"><b>Windows x64 · Probado con <a href="https://obsproject.com/">OBS Studio</a> 32.2.2 · Versión normal y Steam · Gratis</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.7-Setup.exe"><b>⬇ Descargar instalador</b></a> · <a href="#-inicio-rápido">🚀 Inicio rápido</a> · <a href="https://boosty.to/tripchiller">☕ Apoyar al autor</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ Descargar instalador</b></a> · <a href="#-inicio-rápido">🚀 Inicio rápido</a> · <a href="https://boosty.to/tripchiller">☕ Apoyar al autor</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
 **ASCII ⛶ VISOR** es un plugin de filtro de vídeo para [OBS Studio](https://obsproject.com/) que convierte tu cámara web u otra fuente de vídeo en imágenes ASCII en tiempo real. Elige caracteres, cambia colores y densidad y adapta la imagen a tu escena. El resultado aparece al instante en la vista previa y en la grabación o transmisión.
 
 Para cámaras con estilo propio, transmisiones creativas, actuaciones musicales y experimentos con vídeo.
+
+Un avatar ASCII también es una alternativa a una presentación de estilo VTuber: conserva tus movimientos y reacciones en directo y muestra una imagen estilizada en lugar de la cámara convencional. Ofrece cierta privacidad visual, pero no garantiza el anonimato: tu voz, silueta y los detalles de la escena pueden seguir siendo reconocibles.
 
 ## ✨ Funciones
 
@@ -58,13 +60,15 @@ https://github.com/user-attachments/assets/772cb41e-769f-432c-b734-f8f910bb3957
 
 Con el fondo transparente, los juegos, vídeos y otras fuentes se ven entre los caracteres. Integra tu cámara ASCII en el diseño del directo.
 
-La transparencia afecta a los espacios entre caracteres; no separa automáticamente a la persona de la habitación. Añadiremos una demostración de superposición más adelante.
+La transparencia afecta a los espacios entre caracteres; no separa automáticamente a la persona de la habitación.
+
+https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 <a name="quick-start"></a>
 
 ## 🚀 Inicio rápido
 
-1. Descarga **ASCII-VISOR-0.2.7-Setup.exe** con el enlace superior o desde **Assets** en los lanzamientos.
+1. Descarga **ASCII-VISOR-0.2.8-Setup.exe** con el enlace superior o desde **Assets** en los lanzamientos.
 2. Cierra todas las ventanas de OBS y ejecuta el instalador.
 3. Elige **OBS normal / Steam — instalación compartida**. Para OBS portátil, elige esa opción y su carpeta.
 4. Abre OBS y selecciona la cámara u otra fuente de vídeo.
@@ -79,10 +83,10 @@ Usa el icono del ojo para comparar con el vídeo original. El efecto sigue activ
 
 | Archivo | Uso |
 |---|---|
-| **[ASCII-VISOR-0.2.7-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ASCII-VISOR-0.2.7-Setup.exe)** | Recomendado. Instala para OBS normal, Steam o portátil y crea las carpetas necesarias. |
-| **[ascii-visor-0.2.7-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-windows-x64.zip)** | Instalación manual para OBS normal y Steam. |
-| **[ascii-visor-0.2.7-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-portable.zip)** | Instalación manual para OBS portátil. |
-| **[ascii-visor-0.2.7-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.7/ascii-visor-0.2.7-source.zip)** | Código fuente para desarrolladores; no hace falta para usar el plugin. |
+| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | Recomendado. Instala para OBS normal, Steam o portátil y crea las carpetas necesarias. |
+| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | Instalación manual para OBS normal y Steam. |
+| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | Instalación manual para OBS portátil. |
+| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | Código fuente para desarrolladores; no hace falta para usar el plugin. |
 
 Instalación manual, actualización y eliminación: [INSTALL.md](INSTALL.md).
 

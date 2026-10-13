@@ -16,7 +16,7 @@ Copy-Item -LiteralPath (Join-Path $PluginRoot 'LICENSE') -Destination (Join-Path
 $files=Get-ChildItem -LiteralPath (Join-Path $payload 'ascii-visor') -Recurse -File | ForEach-Object {
  [pscustomobject]@{path=$_.FullName.Substring($payload.Length+1).Replace('\','/');sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
 }
-[pscustomobject]@{version='0.2.7';files=@($files)} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding UTF8
+[pscustomobject]@{version='0.2.8';files=@($files)} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding UTF8
 Compress-Archive -Path (Join-Path $payload '*') -DestinationPath (Join-Path $PSScriptRoot 'payload.zip') -Force
 Push-Location $PSScriptRoot
 try {
@@ -26,7 +26,7 @@ try {
  }
  & "$CompilerRoot/windres.exe" -i setup.rc -o setup-res.o
  if($LASTEXITCODE){throw 'Resource compilation failed'}
- & "$CompilerRoot/clang.exe" -O2 -Wall -Wextra -municode -mwindows bootstrap.c setup-res.o -luser32 -o ASCII-VISOR-0.2.7-Setup.exe
+ & "$CompilerRoot/clang.exe" -O2 -Wall -Wextra -municode -mwindows bootstrap.c setup-res.o -luser32 -o ASCII-VISOR-0.2.8-Setup.exe
  if($LASTEXITCODE){throw 'Installer compilation failed'}
- Write-Host 'Built ASCII-VISOR-0.2.7-Setup.exe'
+ Write-Host 'Built ASCII-VISOR-0.2.8-Setup.exe'
 } finally{Pop-Location}
