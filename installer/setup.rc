@@ -2,4 +2,7 @@
 101 RCDATA "setup.ps1"
 102 RCDATA "install-engine.ps1"
 103 RCDATA "payload.zip"
+104 RCDATA "locales.json"
+105 RCDATA "flags.cs"
+106 RCDATA "launch-obs.ps1"
 1 RT_MANIFEST "setup.manifest"

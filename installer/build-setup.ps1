@@ -19,7 +19,7 @@ $files=Get-ChildItem -LiteralPath (Join-Path $payload 'ascii-visor') -Recurse -F
 Compress-Archive -Path (Join-Path $payload '*') -DestinationPath (Join-Path $PSScriptRoot 'payload.zip') -Force
 Push-Location $PSScriptRoot
 try {
- foreach($file in @('setup.ps1','install-engine.ps1')){
+ foreach($file in @('setup.ps1','install-engine.ps1','launch-obs.ps1')){
   $path=Join-Path $PSScriptRoot $file
   [IO.File]::WriteAllText($path,[IO.File]::ReadAllText($path),[Text.UTF8Encoding]::new($true))
  }

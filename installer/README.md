@@ -1,6 +1,6 @@
 # ASCII VISOR installer 0.2.6
 
-Double-click ASCII-VISOR-0.2.6-Setup.exe. Windows requests administrator permission to write the shared plugin directory. Choose Russian or English in the top-right selector.
+Double-click ASCII-VISOR-0.2.6-Setup.exe. Windows requests administrator permission to write the shared plugin directory. Choose one of ten languages in the top-right selector. Native language names and bitmap flag icons help identify each language.
 
 Close all OBS windows, select Standard OBS / Steam and click Install. OBS 32.2.2 is detected in common installation locations; if it is not found, select your obs64.exe. Confirm the destination. Directories are created automatically.
 
@@ -8,7 +8,7 @@ For portable OBS select Portable OBS, then choose that copy's bin/64bit/obs64.ex
 
 The installer validates the package before use, refuses incompatible OBS versions, leaves profiles and scene collections untouched, preserves old plugin files in visor-install-backups and rolls back file replacements on failure. Backup folders are retained deliberately. A uniquely named temporary extraction folder is retained for diagnostics.
 
-This installer is not digitally signed. Windows will show an unknown publisher. Download it only from the project's GitHub release. The implementation does not provide automatic updates or an uninstaller; manual removal paths are documented in INSTALL.md.
+This installer is not digitally signed. Windows will show an unknown publisher. Download it only from the project's GitHub release. The finish screen can optionally launch the selected OBS or launch through Steam when available. Launch requests are delegated to the existing desktop Explorer to avoid inheriting the installer administrator token (https://devblogs.microsoft.com/oldnewthing/20131118-00/?p=2643). A small launch probe confirmed ordinary user permissions. If desktop Explorer is unavailable, the installer asks the user to open OBS manually. The implementation does not provide automatic updates or an uninstaller; manual removal paths are documented in INSTALL.md.
 
 ## Build from the repository
 
@@ -22,4 +22,4 @@ Pass -CompilerRoot if the portable compiler is in another location. The builder 
 
 ## Verification
 
-The installation engine was tested in new isolated directories: fresh standard and portable layouts, backup preservation, user-settings preservation, rollback, corrupted-package rejection, path containment and OBS version recognition. The Windows PowerShell 5.1 interface was rendered and inspected. An actual user run of the compiled executable with administrator confirmation remains necessary before publication.
+The installation engine was tested in new isolated directories: fresh standard and portable layouts, backup preservation, user-settings preservation, rollback, corrupted-package rejection, path containment and OBS version recognition. The Windows PowerShell 5.1 interface was rendered and inspected. The author confirmed both upgrade and clean installation with the previous two-language build in ordinary and Steam OBS 32.2.2. R3 adds ten languages, flags, translated credits and an optional launch choice on the finish screen. Its native window launch, language completeness, initial/finish layouts and installation engine have been checked; a user run of R3 and its optional OBS/Steam launch remain to be confirmed.
