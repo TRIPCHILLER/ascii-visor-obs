@@ -144,3 +144,7 @@ ASCII ⛶ VISOR · OBS Edition — **бесплатный плагин с отк
 Плагин распространяется под **GPL-2.0-or-later**, шрифты — под **SIL Open Font License**. Подробнее: [LICENSE](LICENSE) и [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ASCII ⛶ VISOR · OBS Edition — независимый проект сообщества, созданный [TRIPCHILLER](https://github.com/TRIPCHILLER). Он не является официальным продуктом OBS Project.
+
+
+https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
+
