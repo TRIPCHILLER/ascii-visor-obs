@@ -2,6 +2,12 @@
 
 Verified target: Windows x64, OBS Studio 32.2.2. Close OBS before copying or updating plugin files.
 
+## Installer (recommended)
+
+Run ASCII-VISOR-0.2.6-Setup.exe, confirm Windows administrator permission, and select Standard OBS / Steam. The installer detects compatible OBS in common locations and creates the plugin folder automatically. If detection fails, select your OBS bin/64bit/obs64.exe. Choose Portable OBS to install into a selected portable copy instead.
+
+The installer UI is available in Russian and English. Existing plugin files are backed up, and OBS profiles and scenes are preserved. The executable is unsigned; the first end-to-end user test is pending while this release is a draft.
+
 ## Ordinary OBS and Steam OBS
 
 Extract the windows-x64 archive. Copy its `ascii-visor` folder to:
@@ -31,6 +37,10 @@ Do not install both layouts into the same OBS instance: duplicate copies can pre
 ## Updates
 
 Close OBS, preserve a backup of the plugin's existing DLL and data, then replace them with the matching files from the new release. Leave OBS profiles, collections and user settings untouched. New locale files are included in the same download. There is no built-in automatic updater.
+
+## Removal
+
+Close OBS. For the shared installation remove only C:\ProgramData\obs-studio\plugins\ascii-visor. For the portable layout remove only obs-plugins/64bit/ascii-visor.dll and data/obs-plugins/ascii-visor inside that portable OBS. Do not remove OBS itself, its other plugins, profiles or scene collections. The installer does not currently register an uninstaller.
 
 ## Quick checks
 

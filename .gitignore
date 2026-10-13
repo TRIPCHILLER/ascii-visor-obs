@@ -5,3 +5,8 @@
 *.log
 *.zip
 __pycache__/
+/installer/*.exe
+/installer/*.o
+/installer/payload-build-*/
+/installer/extracted-*/
+/installer/tests-*/

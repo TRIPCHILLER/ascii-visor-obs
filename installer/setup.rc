@@ -1,0 +1,5 @@
+#include <windows.h>
+101 RCDATA "setup.ps1"
+102 RCDATA "install-engine.ps1"
+103 RCDATA "payload.zip"
+1 RT_MANIFEST "setup.manifest"
