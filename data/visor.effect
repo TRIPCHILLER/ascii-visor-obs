@@ -1,0 +1,50 @@
+uniform float4x4 ViewProj;
+uniform texture2d image;
+uniform texture2d atlas;
+uniform float2 grid_size;
+uniform float glyph_count;
+uniform float contrast;
+uniform float gamma;
+uniform float black_point;
+uniform float white_point;
+uniform float invert;
+uniform float mirror;
+uniform float transparent;
+uniform float4 foreground;
+uniform float4 background;
+uniform float zoom;
+uniform float2 center;
+sampler_state linear_sampler { Filter = Linear; AddressU = Clamp; AddressV = Clamp; };
+sampler_state point_sampler { Filter = Point; AddressU = Clamp; AddressV = Clamp; };
+struct VertData { float4 pos : POSITION; float2 uv : TEXCOORD0; };
+VertData VSDefault(VertData v) { v.pos=mul(float4(v.pos.xyz,1.0),ViewProj); return v; }
+float4 PSDownsample(VertData v) : TARGET {
+ float2 cell=floor(v.uv*grid_size);
+ float4 sum=float4(0.0,0.0,0.0,0.0);
+ // Area sampling replaces browser Canvas downscaling. No CPU frame readback.
+ for(int y=0;y<4;y++)for(int x=0;x<4;x++) {
+  float2 uv=(cell+(float2(x,y)+0.5)/4.0)/grid_size;
+  if(mirror>0.5) uv.x=1.0-uv.x;
+  sum+=image.Sample(linear_sampler,uv);
+ }
+ return sum/16.0;
+}
+float4 PSDraw(VertData v) : TARGET {
+ v.uv=(v.uv-0.5)/zoom+center;
+ if(v.uv.x<0.0 || v.uv.x>1.0 || v.uv.y<0.0 || v.uv.y>1.0){return transparent>0.5?float4(0.0,0.0,0.0,0.0):background;}
+ float2 cell=min(floor(v.uv*grid_size),grid_size-1.0);
+ float4 src=image.Sample(point_sampler,(cell+0.5)/grid_size);
+ float q=dot(src.rgb,float3(0.2126,0.7152,0.0722));
+ q=saturate((q-0.5)*contrast+0.5);
+ q=pow(q,1.0/gamma);
+ q=saturate((q-black_point)/max(0.000001,white_point-black_point));
+ if(invert>0.5)q=1.0-q;
+ float idx=floor(q*(glyph_count-1.0)+0.5);
+ float2 local=frac(v.uv*grid_size);
+ float mask=atlas.Sample(point_sampler,float2((idx+local.x)/glyph_count,local.y)).r;
+ float alpha=transparent>0.5?mask:1.0;
+ float3 rgb=transparent>0.5?foreground.rgb*mask:lerp(background.rgb,foreground.rgb,mask);
+ return float4(rgb*src.a,alpha*src.a);
+}
+technique Downsample { pass { vertex_shader=VSDefault(v); pixel_shader=PSDownsample(v); } }
+technique Draw { pass { vertex_shader=VSDefault(v); pixel_shader=PSDraw(v); } }

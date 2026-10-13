@@ -1,0 +1,7 @@
+/build/
+/tools/
+/vendor/
+/dist/
+*.log
+*.zip
+__pycache__/
