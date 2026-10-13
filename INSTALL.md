@@ -6,7 +6,7 @@ Verified target: Windows x64, OBS Studio 32.2.2. Close OBS before copying or upd
 
 Run ASCII-VISOR-0.2.7-Setup.exe, confirm Windows administrator permission, and select Standard OBS / Steam. The installer detects compatible OBS in common locations and creates the plugin folder automatically. If detection fails, select your OBS bin/64bit/obs64.exe. Choose Portable OBS to install into a selected portable copy instead.
 
-The installer UI is available in the same ten languages as the plugin, with native language names and flag icons. Existing plugin files are backed up, and OBS profiles and scenes are preserved. The executable is unsigned; the previous build passed user upgrade and clean-install tests in ordinary and Steam OBS. R3 localization and its optional launch action are awaiting the final user check while this release is a draft.
+The installer UI is available in the same ten languages as the plugin, with native language names and flag icons. Existing plugin files are backed up, and OBS profiles and scenes are preserved. The executable is unsigned; the previous build passed user upgrade and clean-install tests in ordinary and Steam OBS. The author also verified the localized installer and its optional launch action in both editions.
 
 ## Ordinary OBS and Steam OBS
 
