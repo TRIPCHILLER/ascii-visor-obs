@@ -27,6 +27,9 @@ struct visor {
  gs_effect_t *effect;
  gs_texrender_t *grid;
  gs_texrender_t *output;
+ gs_texrender_t *levels[2];
+ int level_index, history_columns, history_rows;
+ bool history_valid, stability;
  gs_texture_t *atlas;
  int columns, count, charset_id, fps;
  uint64_t next_frame;
@@ -117,6 +120,7 @@ static const char *get_name(void *unused) {(void)unused;return "ASCII ⛶ VISOR"
 static void defaults(obs_data_t *s) {
  obs_data_set_default_int(s,"charset",0);obs_data_set_default_string(s,"custom","@%#*+=-:. ");
  obs_data_set_default_int(s,"columns",100);
+ obs_data_set_default_bool(s,"stability",true);
  obs_data_set_default_double(s,"contrast",2.);obs_data_set_default_double(s,"gamma",.9);
  obs_data_set_default_double(s,"black",.06);obs_data_set_default_double(s,"white",.98);
  obs_data_set_default_int(s,"fg",0xffc78a);obs_data_set_default_int(s,"bg",0);
@@ -128,6 +132,7 @@ static void defaults(obs_data_t *s) {
 static void update(void *data,obs_data_t *s) {
  obs_data_set_string(s,"_visor_info",obs_module_text("AuthorInfo"));
  struct visor *v=data;int set=(int)obs_data_get_int(s,"charset");
+ v->stability=obs_data_get_bool(s,"stability");v->history_valid=false;
  const char *str=set>=0 && set<8?sets[set]:obs_data_get_string(s,"custom");
  obs_enter_graphics();
  if(strcmp(v->charset,str) || !v->atlas || v->charset_id!=set) {
@@ -152,15 +157,17 @@ static void update(void *data,obs_data_t *s) {
 }
 static void destroy(void *data) {
  struct visor *v=data;obs_enter_graphics();gs_texture_destroy(v->atlas);
- gs_effect_destroy(v->effect);gs_texrender_destroy(v->grid);gs_texrender_destroy(v->output);obs_leave_graphics();bfree(v);
+ gs_effect_destroy(v->effect);gs_texrender_destroy(v->grid);gs_texrender_destroy(v->output);
+ gs_texrender_destroy(v->levels[0]);gs_texrender_destroy(v->levels[1]);obs_leave_graphics();bfree(v);
 }
 static void *create(obs_data_t *s,obs_source_t *source) {
  struct visor *v=bzalloc(sizeof(*v));v->source=source;
  char *path=obs_module_file("visor.effect");char *err=NULL;
  obs_enter_graphics();v->effect=gs_effect_create_from_file(path,&err);v->grid=gs_texrender_create(GS_RGBA,GS_ZS_NONE);
- v->output=gs_texrender_create(GS_RGBA,GS_ZS_NONE);obs_leave_graphics();
+ v->output=gs_texrender_create(GS_RGBA,GS_ZS_NONE);
+ v->levels[0]=gs_texrender_create(GS_RGBA,GS_ZS_NONE);v->levels[1]=gs_texrender_create(GS_RGBA,GS_ZS_NONE);obs_leave_graphics();
  bfree(path);if(err){blog(LOG_ERROR,"[ASCII VISOR] Shader: %s",err);bfree(err);}
- if(!v->effect || !v->grid || !v->output) {destroy(v);return NULL;}
+ if(!v->effect || !v->grid || !v->output || !v->levels[0] || !v->levels[1]) {destroy(v);return NULL;}
  update(v,s);if(!v->atlas){destroy(v);return NULL;}return v;
 }
 static void fill_palettes(obs_properties_t *p,obs_data_t *s){
@@ -239,6 +246,7 @@ static obs_properties_t *properties(void *data) {
  obs_properties_add_float_slider(p,"black",obs_module_text("BlackPoint"),0.,.99,.01);
  obs_properties_add_float_slider(p,"white",obs_module_text("WhitePoint"),.01,1.,.01);
  obs_properties_add_bool(p,"invert",obs_module_text("Invert"));obs_properties_add_bool(p,"mirror",obs_module_text("Mirror"));
+ obs_properties_add_bool(p,"stability",obs_module_text("Stability"));
  p=obs_properties_create();obs_properties_add_group(root,"style_group",obs_module_text("StyleGroup"),OBS_GROUP_NORMAL,p);
  list=obs_properties_add_list(p,"palette",obs_module_text("Palette"),OBS_COMBO_TYPE_LIST,OBS_COMBO_FORMAT_INT);
  obs_property_set_modified_callback(list,palette_changed);
@@ -277,6 +285,9 @@ static void render(void *data,gs_effect_t *unused) {
  struct vec2 grid;vec2_set(&grid,(float)v->columns,(float)rows);
  gs_effect_set_vec2(gs_effect_get_param_by_name(v->effect,"grid_size"),&grid);
  set_float(v->effect,"mirror",v->mirror?1.f:0.f);
+ set_float(v->effect,"glyph_count",(float)v->count);set_float(v->effect,"contrast",v->contrast);
+ set_float(v->effect,"gamma",v->gamma);set_float(v->effect,"black_point",v->black);set_float(v->effect,"white_point",v->white);
+ set_float(v->effect,"invert",v->invert?1.f:0.f);
  if(!obs_source_process_filter_begin(v->source,GS_RGBA,OBS_NO_DIRECT_RENDERING))return;
  gs_texrender_reset(v->grid);
  if(!gs_texrender_begin(v->grid,v->columns,rows)) {obs_source_skip_video_filter(v->source);return;}
@@ -284,12 +295,29 @@ static void render(void *data,gs_effect_t *unused) {
  gs_blend_state_push();gs_blend_function(GS_BLEND_ONE,GS_BLEND_ZERO);
  obs_source_process_filter_tech_end(v->source,v->effect,v->columns,rows,"Downsample");
  gs_texrender_end(v->grid);
+ /* Hysteresis only changes the brightness-to-glyph decision. It does not blur
+    frames, change the character atlas, or delay large brightness changes. */
+ bool valid=v->history_valid && v->history_columns==v->columns && v->history_rows==rows;
+ int next=1-v->level_index;
+ gs_texrender_reset(v->levels[next]);
+ if(!gs_texrender_begin(v->levels[next],v->columns,rows)){gs_blend_state_pop();return;}
+ gs_ortho(0,(float)v->columns,0,(float)rows,-100,100);
+ gs_effect_set_texture(gs_effect_get_param_by_name(v->effect,"image"),gs_texrender_get_texture(v->grid));
+ set_float(v->effect,"glyph_count",(float)v->count);set_float(v->effect,"contrast",v->contrast);
+ set_float(v->effect,"gamma",v->gamma);set_float(v->effect,"black_point",v->black);set_float(v->effect,"white_point",v->white);
+ set_float(v->effect,"invert",v->invert?1.f:0.f);
+ gs_effect_set_texture(gs_effect_get_param_by_name(v->effect,"previous_levels"),valid?gs_texrender_get_texture(v->levels[v->level_index]):gs_texrender_get_texture(v->grid));
+ set_float(v->effect,"history_valid",valid?1.f:0.f);set_float(v->effect,"stability",v->stability?1.f:0.f);
+ while(gs_effect_loop(v->effect,"Quantize"))gs_draw_sprite(NULL,0,v->columns,rows);
+ gs_texrender_end(v->levels[next]);v->level_index=next;v->history_valid=true;
+ v->history_columns=v->columns;v->history_rows=rows;
  gs_texrender_reset(v->output);
  if(!gs_texrender_begin(v->output,w,h)){gs_blend_state_pop();return;}
  gs_ortho(0,(float)w,0,(float)h,-100,100);
  gs_effect_set_vec2(gs_effect_get_param_by_name(v->effect,"grid_size"),&grid);
  gs_effect_set_texture(gs_effect_get_param_by_name(v->effect,"image"),gs_texrender_get_texture(v->grid));
  gs_effect_set_texture(gs_effect_get_param_by_name(v->effect,"atlas"),v->atlas);
+ gs_effect_set_texture(gs_effect_get_param_by_name(v->effect,"levels"),gs_texrender_get_texture(v->levels[v->level_index]));
  set_float(v->effect,"glyph_count",(float)v->count);set_float(v->effect,"contrast",v->contrast);
  set_float(v->effect,"gamma",v->gamma);set_float(v->effect,"black_point",v->black);set_float(v->effect,"white_point",v->white);
  set_float(v->effect,"invert",v->invert?1.f:0.f);set_float(v->effect,"transparent",v->transparent?1.f:0.f);
@@ -309,7 +337,7 @@ bool obs_module_load(void) {
  const char *names[]={"fonts/BetterVCR.ttf","fonts/NotoSansMonoCJKjp-Regular.otf"};
  for(int i=0;i<2;i++){char *p=obs_module_file(names[i]);if(p){MultiByteToWideChar(CP_UTF8,0,p,-1,font_paths[i],MAX_PATH);
   if(!AddFontResourceExW(font_paths[i],FR_PRIVATE,NULL))blog(LOG_WARNING,"[ASCII VISOR] Cannot load private font %s",p);bfree(p);}}
- obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.6 registered");return true;
+ obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.7 registered");return true;
 }
 void obs_module_unload(void) {for(int i=0;i<2;i++)if(font_paths[i][0])RemoveFontResourceExW(font_paths[i],FR_PRIVATE,NULL);}
 const char *obs_module_name(void){return "ASCII VISOR — OBS EDITION";}

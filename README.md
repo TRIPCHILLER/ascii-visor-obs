@@ -6,9 +6,9 @@ Turn your webcam or another video source into live ASCII artwork. Control charac
 
 ## Status and downloads
 
-Version **0.2.6** is being prepared for its first public release. Windows x64, **OBS Studio 32.2.2**. Other OBS versions and operating systems are not yet verified. Downloadable release assets will be published in [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases).
+Version **0.2.7** is being prepared for its first public release. Windows x64, **OBS Studio 32.2.2**. Other OBS versions and operating systems are not yet verified. Downloadable release assets will be published in [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases).
 
-The plugin has been tested with live Iriun Webcam video and moving test footage. All ten locale files pass completeness and module-loading checks. New translations still need native-speaker proofreading and visual layout review.
+The author tested live Iriun Webcam, ordinary/Steam installation and restart persistence. In 0.2.7 the author confirmed that the new stable-character option resolves the distracting flicker in their setup. Moving test footage and controlled GPU tests also pass. All ten locale files pass completeness and module-loading checks. New translations still need native-speaker proofreading and visual layout review.
 
 ## Features
 
@@ -16,6 +16,7 @@ The plugin has been tested with live Iriun Webcam video and moving test footage.
 - Density from 30 to 150 characters across; default 100.
 - Twenty VISOR color palettes and up to twenty saved custom color styles per filter.
 - Contrast, gamma, black/white levels, inversion and horizontal mirroring.
+- Stable characters enabled by default: suppresses small brightness-driven glyph changes; can be disabled for comparison.
 - Character and background colors; optional transparent background between characters.
 - Image scale, position and refresh rate controls.
 - Russian, English, Spanish, Brazilian Portuguese, German, French, Japanese, Korean, Simplified Chinese and Traditional Chinese. Language follows OBS; English is the fallback.

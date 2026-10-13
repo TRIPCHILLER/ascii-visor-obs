@@ -1,6 +1,10 @@
 uniform float4x4 ViewProj;
 uniform texture2d image;
 uniform texture2d atlas;
+uniform texture2d levels;
+uniform texture2d previous_levels;
+uniform float stability;
+uniform float history_valid;
 uniform float2 grid_size;
 uniform float glyph_count;
 uniform float contrast;
@@ -29,17 +33,29 @@ float4 PSDownsample(VertData v) : TARGET {
  }
  return sum/16.0;
 }
-float4 PSDraw(VertData v) : TARGET {
- v.uv=(v.uv-0.5)/zoom+center;
- if(v.uv.x<0.0 || v.uv.x>1.0 || v.uv.y<0.0 || v.uv.y>1.0){return transparent>0.5?float4(0.0,0.0,0.0,0.0):background;}
- float2 cell=min(floor(v.uv*grid_size),grid_size-1.0);
- float4 src=image.Sample(point_sampler,(cell+0.5)/grid_size);
+float4 PSQuantize(VertData v) : TARGET {
+ float4 src=image.Sample(point_sampler,v.uv);
  float q=dot(src.rgb,float3(0.2126,0.7152,0.0722));
  q=saturate((q-0.5)*contrast+0.5);
  q=pow(q,1.0/gamma);
  q=saturate((q-black_point)/max(0.000001,white_point-black_point));
  if(invert>0.5)q=1.0-q;
- float idx=floor(q*(glyph_count-1.0)+0.5);
+ float scale=max(1.0,glyph_count-1.0);
+ float u=q*(glyph_count-1.0);
+ float idx=floor(u+0.5);
+ if(stability>0.5 && history_valid>0.5){
+  float previous=floor(previous_levels.Sample(point_sampler,v.uv).r*scale+0.5);
+  if(abs(u-previous)<=0.75)idx=previous;
+ }
+ return float4(idx/scale,0.0,0.0,1.0);
+}
+float4 PSDraw(VertData v) : TARGET {
+ v.uv=(v.uv-0.5)/zoom+center;
+ if(v.uv.x<0.0 || v.uv.x>1.0 || v.uv.y<0.0 || v.uv.y>1.0){return transparent>0.5?float4(0.0,0.0,0.0,0.0):background;}
+ float2 cell=min(floor(v.uv*grid_size),grid_size-1.0);
+ float2 uv=(cell+0.5)/grid_size;
+ float4 src=image.Sample(point_sampler,uv);
+ float idx=floor(levels.Sample(point_sampler,uv).r*max(1.0,glyph_count-1.0)+0.5);
  float2 local=frac(v.uv*grid_size);
  float mask=atlas.Sample(point_sampler,float2((idx+local.x)/glyph_count,local.y)).r;
  float alpha=transparent>0.5?mask:1.0;
@@ -47,4 +63,5 @@ float4 PSDraw(VertData v) : TARGET {
  return float4(rgb*src.a,alpha*src.a);
 }
 technique Downsample { pass { vertex_shader=VSDefault(v); pixel_shader=PSDownsample(v); } }
+technique Quantize { pass { vertex_shader=VSDefault(v); pixel_shader=PSQuantize(v); } }
 technique Draw { pass { vertex_shader=VSDefault(v); pixel_shader=PSDraw(v); } }
