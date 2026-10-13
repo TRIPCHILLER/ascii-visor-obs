@@ -1,0 +1,19 @@
+name: "Feature idea / Предложить идею"
+description: "Suggest a feature or improvement. / Предложите функцию или улучшение."
+title: "[Idea]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Write in the language you prefer. / Пишите на удобном вам языке."
+  - type: textarea
+    id: idea
+    attributes:
+      label: "Your idea / Ваша идея"
+      description: "What would you like to add or improve? / Что вы хотели бы добавить или улучшить?"
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: "How would you use it? / Как вы будете это использовать?"
+      description: "A use case or example helps us understand the idea. / Пример поможет понять вашу задумку."

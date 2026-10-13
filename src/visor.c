@@ -231,6 +231,12 @@ static bool support_author(obs_properties_t *p,obs_property_t *prop,void *data){
  else blog(LOG_WARNING,"[ASCII VISOR] Could not open support page (%lld)",(long long)(INT_PTR)result);
  return false;
 }
+static bool feedback_author(obs_properties_t *p,obs_property_t *prop,void *data){
+ (void)p;(void)prop;(void)data;
+ HINSTANCE result=ShellExecuteW(NULL,L"open",L"https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose",NULL,NULL,SW_SHOWNORMAL);
+ if((INT_PTR)result<=32)blog(LOG_WARNING,"[ASCII VISOR] Could not open feedback page (%lld)",(long long)(INT_PTR)result);
+ return false;
+}
 static obs_properties_t *properties(void *data) {
  struct visor *v=data;obs_properties_t *root=obs_properties_create(),*p=obs_properties_create();
  obs_properties_add_group(root,"image_group",obs_module_text("ImageGroup"),OBS_GROUP_NORMAL,p);
@@ -266,6 +272,8 @@ static obs_properties_t *properties(void *data) {
  obs_property_t *support=obs_properties_add_button2(p,"support_author",obs_module_text("SupportAuthor"),support_author,NULL);
  obs_property_set_long_description(support,obs_module_text("SupportHint"));
  obs_property_set_visible(support,strncmp(VISOR_SUPPORT_URL,"https://",8)==0);
+ obs_property_t *feedback=obs_properties_add_button2(p,"feedback_author",obs_module_text("Feedback"),feedback_author,NULL);
+ obs_property_set_long_description(feedback,obs_module_text("FeedbackHint"));
  obs_data_t *s=v?obs_source_get_settings(v->source):obs_data_create();fill_palettes(root,s);
  obs_property_set_visible(obs_properties_get(root,"custom"),obs_data_get_int(s,"charset")==8);obs_data_release(s);return root;
 }

@@ -1,0 +1,33 @@
+name: "Bug report / Сообщить об ошибке"
+description: "Something isn't working? Tell us what happened. / Что-то не работает? Расскажите о проблеме."
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Write in the language you prefer. / Пишите на удобном вам языке."
+  - type: input
+    id: versions
+    attributes:
+      label: "OBS and plugin versions / Версии OBS и плагина"
+      placeholder: "OBS 32.2.2, VISOR 0.2.7, Windows 11"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: "What happened? / Что произошло?"
+      description: "What did you expect, and what happened instead? Screenshots or a short video help. / Что вы ожидали и что получилось? Можно приложить скриншот или короткое видео."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "How to reproduce / Как повторить"
+      description: "Describe the steps and relevant filter settings. / Опишите действия и настройки фильтра."
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: "Additional details / Дополнительные сведения"
+      description: "Optional: OBS log, source type, hardware, or anything that may help. / Необязательно: журнал OBS, тип источника, оборудование или другие полезные сведения."
