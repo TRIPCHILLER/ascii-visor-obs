@@ -8,7 +8,7 @@
 
 <h1 align="center">ASCII ⛶ VISOR · OBS Edition</h1>
 
-<p align="center"><b>Превратите камеру и видео в живое изображение из символов — прямо в <a href="https://obsproject.com/">OBS Studio</a>.</b></p>
+<p align="center"><b>Превратите видео с веб-камеры в подвижное анимированнное изображение из символов — прямо в <a href="https://obsproject.com/">OBS Studio</a>.</b></p>
 
 <p align="center">Разработано на основе ASCII ⛶ VISOR 5.0 · Автор — <a href="https://github.com/TRIPCHILLER">TRIPCHILLER</a></p>
 
