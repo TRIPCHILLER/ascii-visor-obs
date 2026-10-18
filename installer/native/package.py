@@ -12,6 +12,7 @@ destination.mkdir(parents=True, exist_ok=True)
 shutil.copy2(root / "installer/locales.json", destination / "locales.json")
 shutil.copy2(root / "installer/branding/installer-icon.png", destination / "installer-icon.png")
 shutil.copytree(root / "installer/native/flags", destination / "flags")
+shutil.copytree(root / "installer/native/licenses", destination / "licenses")
 payload = destination / "payload"
 payload.mkdir()
 shutil.copytree(plugin, payload / plugin.name)

@@ -13,3 +13,5 @@ Check translations with `python tests/check-translations.py`. Changing the OBS i
 ## Scene transparency regression
 
 After building, add your OBS `bin/64bit` folder to `PATH` and run `build/scene-transparency.exe <plugin-root> <output-prefix> <OBS-root>`. Use this repository as the plugin root, supply your OBS installation directory, and choose a private output directory for the generated PPM files. The test uses synthetic sources and verifies actual compositing over a colored background, including fresh and cached frames. It does not access a webcam or change OBS scenes.
+
+Cross-platform preview builds and native installer details: [CROSS_PLATFORM.md](CROSS_PLATFORM.md).

@@ -38,11 +38,15 @@ jobs:
           cp 'build_x86_64/installer/native/ASCII VISOR Setup' preview/setup/
           python3 installer/native/package.py preview/setup preview/ascii-visor
           QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --preview test-results/installer
+          QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --self-test
           tar -C preview/setup -czf ascii-visor-linux-setup-preview.tar.gz .
+          bash installer/native/appimage.sh
       - uses: actions/upload-artifact@v4
         with:
           name: ascii-visor-linux-x86_64-preview
-          path: ascii-visor-linux-*-preview.tar.gz
+          path: |
+            ascii-visor-linux-*-preview.tar.gz
+            ascii-visor-linux-setup-preview.AppImage
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
@@ -74,6 +78,7 @@ jobs:
           codesign --force --deep --sign - "$app"
           lipo "$app/Contents/MacOS/ASCII VISOR Setup" -verify_arch arm64 x86_64
           QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
+          QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --self-test
           ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
       - uses: actions/upload-artifact@v4
         with:

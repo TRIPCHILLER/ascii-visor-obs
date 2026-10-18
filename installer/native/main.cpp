@@ -38,6 +38,30 @@ static void verifyPayload(const QString &root){
   if(rel!="manifest.json"&&!listed.contains(rel))fail("Unlisted payload file: "+rel);
  }
 }
+static QString deployPlugin(const QString &payload,const QString &plugin,const QString &root){
+ verifyPayload(payload);
+   if(!QDir().mkpath(root)||QFileInfo(root).isSymLink())fail("Cannot use destination directory");
+   const QString destination=root+"/"+plugin;
+   if(QFileInfo(destination).isSymLink())fail("Destination is a symbolic link");
+
+   QTemporaryDir staging(root+"/.visor-stage-XXXXXX");if(!staging.isValid())fail("Cannot create staging directory");
+   const QString staged=staging.path()+"/"+plugin;
+   if(!copyTree(payload+"/"+plugin,staged))fail("Cannot stage plugin files");
+#ifdef Q_OS_MACOS
+   QProcess signing;signing.start("/usr/bin/codesign",{"--force","--sign","-",staged});
+   if(!signing.waitForFinished(30000)||signing.exitCode()!=0)fail("Local plugin signing failed");
+#endif
+   QString backup;
+   if(QFileInfo::exists(destination)){
+    backup=root+"/.visor-backup-"+QUuid::createUuid().toString(QUuid::WithoutBraces);
+    if(!QDir().rename(destination,backup))fail("Cannot back up previous plugin");
+   }
+   if(!QDir().rename(staged,destination)){
+    if(!backup.isEmpty()&&!QDir().rename(backup,destination))fail("Install and rollback failed. Backup: "+backup);
+    fail("Install failed; previous plugin restored.");
+   }
+ return backup;
+}
 class Setup:public QWidget {
  QJsonObject all;QString resources,code,backup,selectedOBS;
  QLabel *heading,*intro,*detail,*license,*credits,*logo;
@@ -103,26 +127,9 @@ class Setup:public QWidget {
    const QString plugin="ascii-visor";
    if(!QFileInfo::exists(payload+"/"+plugin+"/bin/64bit/ascii-visor.so"))fail("Missing Linux plugin");
 #endif
-   if(!QDir().mkpath(root)||QFileInfo(root).isSymLink())fail("Cannot use destination directory");
    const QString destination=root+"/"+plugin;
-   if(QFileInfo(destination).isSymLink())fail("Destination is a symbolic link");
    if(QMessageBox::question(this,"ASCII VISOR",l("Destination")+"\n"+destination+"\n\n"+l("BackupNotice"))!=QMessageBox::Yes)return;
-   QTemporaryDir staging(root+"/.visor-stage-XXXXXX");if(!staging.isValid())fail("Cannot create staging directory");
-   const QString staged=staging.path()+"/"+plugin;
-   if(!copyTree(payload+"/"+plugin,staged))fail("Cannot stage plugin files");
-#ifdef Q_OS_MACOS
-   QProcess signing;signing.start("/usr/bin/codesign",{"--force","--sign","-",staged});
-   if(!signing.waitForFinished(30000)||signing.exitCode()!=0)fail("Local plugin signing failed");
-#endif
-   backup.clear();
-   if(QFileInfo::exists(destination)){
-    backup=root+"/.visor-backup-"+QUuid::createUuid().toString(QUuid::WithoutBraces);
-    if(!QDir().rename(destination,backup))fail("Cannot back up previous plugin");
-   }
-   if(!QDir().rename(staged,destination)){
-    if(!backup.isEmpty()&&!QDir().rename(backup,destination))fail("Install and rollback failed. Backup: "+backup);
-    fail("Install failed; previous plugin restored.");
-   }
+   backup=deployPlugin(payload,plugin,root);
    complete=true;mode->hide();custom->hide();browse->hide();obsPath->hide();chooseOBS->hide();install->hide();launch->show();launchMode->show();updateText();
   }catch(const std::exception &e){QMessageBox::critical(this,"ASCII VISOR",l("InstallerError")+"\n"+QString::fromUtf8(e.what()));}
  }
@@ -190,6 +197,29 @@ public:
   });updateText();
  }
 };
+static void testInstall(const QString &resources){
+ QTemporaryDir sandbox;if(!sandbox.isValid())fail("Self-test cannot create temporary directory");
+ const QString plugin=
+#ifdef Q_OS_MACOS
+ "ascii-visor.plugin";
+#else
+ "ascii-visor";
+#endif
+ const QString payload=resources+"/payload",root=sandbox.path()+"/plugins";
+ if(!deployPlugin(payload,plugin,root).isEmpty())fail("Unexpected backup on first install");
+ QFile sentinel(root+"/"+plugin+"/previous-version.txt");
+ if(!sentinel.open(QIODevice::WriteOnly))fail("Cannot prepare upgrade fixture");sentinel.write("old version");sentinel.close();
+ const QString backup=deployPlugin(payload,plugin,root);
+ if(backup.isEmpty()||!QFileInfo::exists(backup+"/previous-version.txt")||QFileInfo::exists(root+"/"+plugin+"/previous-version.txt"))fail("Upgrade backup failed");
+ const QString broken=sandbox.path()+"/broken-payload";
+ if(!copyTree(payload,broken))fail("Cannot prepare checksum fixture");
+ auto manifest=QJsonDocument::fromJson(readFile(broken+"/manifest.json")).array();
+ QFile corrupt(broken+"/"+manifest.first().toObject()["path"].toString());
+ if(!corrupt.open(QIODevice::Append))fail("Cannot modify checksum fixture");corrupt.write("tampered");corrupt.close();
+ bool rejected=false;try{verifyPayload(broken);}catch(const std::exception &){rejected=true;}
+ if(!rejected)fail("Corrupt payload was accepted");
+ qInfo("Installer self-test: fresh install, upgrade backup and corrupt payload rejection PASS");
+}
 int main(int argc,char **argv){
  QApplication app(argc,argv);app.setStyle("Fusion");
  QString root=QCoreApplication::applicationDirPath();
@@ -203,7 +233,9 @@ int main(int argc,char **argv){
  "ascii-visor/data/fonts/";
 #endif
  QFontDatabase::addApplicationFont(fontRoot+"NotoSansMonoCJKjp-Regular.otf");
- try{Setup window(root);window.show();
+ try{
+  if(argc==2&&QString::fromLocal8Bit(argv[1])=="--self-test"){testInstall(root);return 0;}
+  Setup window(root);window.show();
   if(argc==3&&QString::fromLocal8Bit(argv[1])=="--preview"){
    QTimer::singleShot(200,&app,[&]{window.preview(QString::fromLocal8Bit(argv[2]));app.quit();});
   }
