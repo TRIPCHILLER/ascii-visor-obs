@@ -1,0 +1,54 @@
+name: Cross-platform preview
+on:
+  push:
+    branches: [feature/cross-platform-obs]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OBS SDK and graphics test tools
+        run: |
+          sudo add-apt-repository --yes ppa:obsproject/obs-studio
+          sudo apt-get update
+          sudo apt-get install -y libobs-dev obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils
+      - run: cmake --preset ubuntu-x86_64 -DENABLE_QT=OFF
+      - run: cmake --build --preset ubuntu-x86_64 --parallel 4
+      - name: Package preview
+        run: |
+          mkdir -p preview/ascii-visor/bin/64bit
+          cp build_x86_64/ascii-visor.so preview/ascii-visor/bin/64bit/
+          cp -R data preview/ascii-visor/data
+          cp LICENSE THIRD_PARTY.md preview/
+          tar -C preview -czf ascii-visor-linux-x86_64-preview.tar.gz .
+          ldd build_x86_64/ascii-visor.so
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ascii-visor-linux-x86_64-preview
+          path: ascii-visor-linux-x86_64-preview.tar.gz
+          if-no-files-found: error
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake --preset macos -DENABLE_QT=OFF
+      - run: cmake --build --preset macos --parallel 4
+      - name: Inspect and package universal preview
+        run: |
+          bundle=build_macos/RelWithDebInfo/ascii-visor.plugin
+          test -d "$bundle"
+          lipo -verify_arch arm64 x86_64 "$bundle/Contents/MacOS/ascii-visor"
+          codesign --verify --deep --strict "$bundle"
+          otool -L "$bundle/Contents/MacOS/ascii-visor"
+          ditto -c -k --keepParent "$bundle" ascii-visor-macos-universal-preview.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ascii-visor-macos-universal-preview
+          path: ascii-visor-macos-universal-preview.zip
+          if-no-files-found: error

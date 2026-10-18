@@ -1,6 +1,8 @@
+#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <shellapi.h>
+#endif
 #include <obs-module.h>
 #include <math.h>
 #include <stdlib.h>
@@ -21,7 +23,9 @@ static const char *sets[] = {
  "　カタサシスセソラリルレロワヲンツッーー・。、。「」ァィゥェォッャュョヴヶ＝…", ". · ▪ ■ ", "····•○◦ ", "█▓▒░"
 };
 static const char *labels[] = {"CL4SS1C", "NUMB3RS", "L4T1N", "КИРИJIJIИЦ4", "カタカナ", "P1X3L", "D0TS", "BL0CKS"};
+#ifdef _WIN32
 struct glyph { WCHAR text[3]; double density; int order; };
+#endif
 struct visor {
  obs_source_t *source;
  gs_effect_t *effect;
@@ -40,12 +44,15 @@ struct visor {
  struct vec4 fg, bg;
  char charset[2048];
 };
+#ifdef _WIN32
 static WCHAR font_paths[2][MAX_PATH];
+#endif
 
 static void color(struct vec4 *v, uint32_t c) {
  v->x=(c&255)/255.f; v->y=((c>>8)&255)/255.f;
  v->z=((c>>16)&255)/255.f; v->w=1.f;
 }
+#ifdef _WIN32
 static int compare_glyph(const void *a, const void *b) {
  const struct glyph *x=a,*y=b;
  return x->density<y->density ? -1 : x->density>y->density ? 1 : x->order-y->order;
@@ -105,6 +112,10 @@ static gs_texture_t *make_atlas(const char *utf8, int *count, float *aspect,bool
  SelectObject(dc,oldfont);DeleteObject(font);DeleteDC(dc);
  *count=k;*aspect=(float)cw/ch;return atlas;
 }
+#else
+#include "atlas-freetype.h"
+#endif
+#include "platform-url.h"
 /* Exact 8x8 tiles from upstream PIXEL2_SIZES and DOTS2_MASKS. */
 static gs_texture_t *make_shape_atlas(bool dots) {
  uint8_t pixels[32*8*4]={0};
@@ -225,17 +236,11 @@ static bool delete_preset(obs_properties_t *p,obs_property_t *prop,void *data){
 static bool support_author(obs_properties_t *p,obs_property_t *prop,void *data){
  (void)p;(void)prop;(void)data;
  if(strncmp(VISOR_SUPPORT_URL,"https://",8)!=0)return false;
- WCHAR url[2048];if(!MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,VISOR_SUPPORT_URL,-1,url,2048))return false;
- HINSTANCE result=ShellExecuteW(NULL,L"open",url,NULL,NULL,SW_SHOWNORMAL);
- if((INT_PTR)result>32)blog(LOG_INFO,"[ASCII VISOR] Support page opened: %s",VISOR_SUPPORT_URL);
- else blog(LOG_WARNING,"[ASCII VISOR] Could not open support page (%lld)",(long long)(INT_PTR)result);
- return false;
+ visor_open_url(VISOR_SUPPORT_URL);return false;
 }
 static bool feedback_author(obs_properties_t *p,obs_property_t *prop,void *data){
  (void)p;(void)prop;(void)data;
- HINSTANCE result=ShellExecuteW(NULL,L"open",L"https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose",NULL,NULL,SW_SHOWNORMAL);
- if((INT_PTR)result<=32)blog(LOG_WARNING,"[ASCII VISOR] Could not open feedback page (%lld)",(long long)(INT_PTR)result);
- return false;
+ visor_open_url("https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose");return false;
 }
 static obs_properties_t *properties(void *data) {
  struct visor *v=data;obs_properties_t *root=obs_properties_create(),*p=obs_properties_create();
@@ -346,11 +351,17 @@ static void render(void *data,gs_effect_t *unused) {
 static struct obs_source_info info={.id="ascii_visor_filter",.type=OBS_SOURCE_TYPE_FILTER,.output_flags=OBS_SOURCE_VIDEO,
  .get_name=get_name,.create=create,.destroy=destroy,.update=update,.get_defaults=defaults,.get_properties=properties,.video_render=render};
 bool obs_module_load(void) {
+#ifdef _WIN32
  const char *names[]={"fonts/BetterVCR.ttf","fonts/NotoSansMonoCJKjp-Regular.otf"};
  for(int i=0;i<2;i++){char *p=obs_module_file(names[i]);if(p){MultiByteToWideChar(CP_UTF8,0,p,-1,font_paths[i],MAX_PATH);
   if(!AddFontResourceExW(font_paths[i],FR_PRIVATE,NULL))blog(LOG_WARNING,"[ASCII VISOR] Cannot load private font %s",p);bfree(p);}}
+#endif
  obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.8 registered");return true;
 }
-void obs_module_unload(void) {for(int i=0;i<2;i++)if(font_paths[i][0])RemoveFontResourceExW(font_paths[i],FR_PRIVATE,NULL);}
+void obs_module_unload(void) {
+#ifdef _WIN32
+ for(int i=0;i<2;i++)if(font_paths[i][0])RemoveFontResourceExW(font_paths[i],FR_PRIVATE,NULL);
+#endif
+}
 const char *obs_module_name(void){return "ASCII VISOR — OBS EDITION";}
 const char *obs_module_description(void){return obs_module_text("Description");}
