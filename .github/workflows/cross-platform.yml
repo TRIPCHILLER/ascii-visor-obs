@@ -74,9 +74,9 @@ jobs:
           find obs-runtime/OBS.app -iname '*opengl*' -o -name default.effect
           mkdir -p test-results
           export DYLD_FRAMEWORK_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
-          export VISOR_TEST_GRAPHICS=$(find "$PWD/obs-runtime/OBS.app" -type f -name libobs-opengl -print -quit)
+          export VISOR_TEST_GRAPHICS="$PWD/obs-runtime/OBS.app/Contents/Frameworks/libobs-opengl.dylib"
           export VISOR_TEST_OBSDATA=$(dirname "$(find "$PWD/obs-runtime/OBS.app" -name default.effect -print -quit)")
-          test -n "$VISOR_TEST_GRAPHICS"
+          test -f "$VISOR_TEST_GRAPHICS"
           ./build_macos/RelWithDebInfo/visor-transparency-test "$PWD" "$PWD/test-results/composite" "$PWD/obs-runtime/OBS.app"
       - name: Inspect and package universal preview
         run: |
