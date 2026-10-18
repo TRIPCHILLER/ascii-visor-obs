@@ -240,5 +240,8 @@ int main(int argc,char **argv){
    QTimer::singleShot(200,&app,[&]{window.preview(QString::fromLocal8Bit(argv[2]));app.quit();});
   }
   return app.exec();}
- catch(const std::exception &e){QMessageBox::critical(nullptr,"ASCII VISOR",QString::fromUtf8(e.what()));return 1;}
+ catch(const std::exception &e){
+  if(argc>1){qCritical("%s",e.what());return 1;}
+  QMessageBox::critical(nullptr,"ASCII VISOR",QString::fromUtf8(e.what()));return 1;
+ }
 }

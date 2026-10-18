@@ -1,7 +1,5 @@
 name: Cross-platform preview
 on:
-  push:
-    branches: [feature/cross-platform-obs]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -72,8 +70,8 @@ jobs:
           app='build_macos/installer/native/RelWithDebInfo/ASCII VISOR Setup.app'
           test -d "$app"
           python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
-          deploy=$(find .deps -name macdeployqt -type f | head -1)
-          test -n "$deploy"
+          deploy=build_macos/installer/native/RelWithDebInfo/visor-macdeployqt
+          test -x "$deploy"
           "$deploy" "$app" -always-overwrite
           codesign --force --deep --sign - "$app"
           lipo "$app/Contents/MacOS/ASCII VISOR Setup" -verify_arch arm64 x86_64

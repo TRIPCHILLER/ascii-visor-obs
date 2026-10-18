@@ -26,4 +26,5 @@ linuxdeploy --appdir AppDir --executable AppDir/usr/bin/ascii-visor-setup --desk
 python3 installer/native/package.py AppDir/usr/bin preview/ascii-visor
 appimagetool AppDir ascii-visor-linux-setup-preview.AppImage
 chmod +x ascii-visor-linux-setup-preview.AppImage
-QT_QPA_PLATFORM=offscreen ./ascii-visor-linux-setup-preview.AppImage --appimage-extract-and-run --preview test-results/appimage
+xvfb-run -a ./ascii-visor-linux-setup-preview.AppImage --appimage-extract-and-run --preview test-results/appimage
+xvfb-run -a ./ascii-visor-linux-setup-preview.AppImage --appimage-extract-and-run --self-test
