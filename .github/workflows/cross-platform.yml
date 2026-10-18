@@ -62,6 +62,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: cmake --preset macos -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
       - run: cmake --build --preset macos --parallel 4
+        id: compile
       - run: ctest --test-dir build_macos -C RelWithDebInfo --output-on-failure
       - name: Test actual OBS 32.2.2 rendering on native CPU
         run: |
@@ -74,11 +75,14 @@ jobs:
           find obs-runtime/OBS.app -iname '*opengl*' -o -name default.effect
           mkdir -p test-results
           export DYLD_FRAMEWORK_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
+          export DYLD_LIBRARY_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
           export VISOR_TEST_GRAPHICS="$PWD/obs-runtime/OBS.app/Contents/Frameworks/libobs-opengl.dylib"
           export VISOR_TEST_OBSDATA=$(dirname "$(find "$PWD/obs-runtime/OBS.app" -name default.effect -print -quit)")
           test -f "$VISOR_TEST_GRAPHICS"
           ./build_macos/RelWithDebInfo/visor-transparency-test "$PWD" "$PWD/test-results/composite" "$PWD/obs-runtime/OBS.app"
       - name: Inspect and package universal preview
+        id: package
+        if: ${{ !cancelled() && steps.compile.conclusion == 'success' }}
         run: |
           bundle=build_macos/RelWithDebInfo/ascii-visor.plugin
           test -d "$bundle"
@@ -102,6 +106,7 @@ jobs:
           QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --self-test
           ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
       - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() && steps.package.conclusion == 'success' }}
         with:
           name: ascii-visor-macos-universal-preview-${{ matrix.os }}
           path: ascii-visor-macos-*-preview.zip
