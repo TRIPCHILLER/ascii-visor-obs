@@ -16,9 +16,15 @@ jobs:
         run: |
           sudo add-apt-repository --yes ppa:obsproject/obs-studio
           sudo apt-get update
-          sudo apt-get install -y libobs-dev obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils
-      - run: cmake --preset ubuntu-x86_64 -DENABLE_QT=OFF
+          sudo apt-get install -y obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils qt6-base-dev libx11-dev
+      - run: cmake --preset ubuntu-x86_64 -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
       - run: cmake --build --preset ubuntu-x86_64 --parallel 4
+      - name: Render and compositing regression tests
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p test-results
+          xvfb-run -a ./build_x86_64/visor-transparency-test "$PWD" "$PWD/test-results/composite" /usr
       - name: Package preview
         run: |
           mkdir -p preview/ascii-visor/bin/64bit
@@ -27,17 +33,27 @@ jobs:
           cp LICENSE THIRD_PARTY.md preview/
           tar -C preview -czf ascii-visor-linux-x86_64-preview.tar.gz .
           ldd build_x86_64/ascii-visor.so
+          mkdir -p preview/setup
+          cp 'build_x86_64/installer/native/ASCII VISOR Setup' preview/setup/
+          python3 installer/native/package.py preview/setup preview/ascii-visor
+          QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --preview test-results/installer
+          tar -C preview/setup -czf ascii-visor-linux-setup-preview.tar.gz .
       - uses: actions/upload-artifact@v4
         with:
           name: ascii-visor-linux-x86_64-preview
-          path: ascii-visor-linux-x86_64-preview.tar.gz
+          path: ascii-visor-linux-*-preview.tar.gz
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-test-results
+          path: test-results/
   macos:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
-      - run: cmake --preset macos -DENABLE_QT=OFF
+      - run: cmake --preset macos -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
       - run: cmake --build --preset macos --parallel 4
       - name: Inspect and package universal preview
         run: |
@@ -47,8 +63,23 @@ jobs:
           codesign --verify --deep --strict "$bundle"
           otool -L "$bundle/Contents/MacOS/ascii-visor"
           ditto -c -k --keepParent "$bundle" ascii-visor-macos-universal-preview.zip
+          app='build_macos/installer/native/RelWithDebInfo/ASCII VISOR Setup.app'
+          test -d "$app"
+          python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
+          deploy=$(find .deps -name macdeployqt -type f | head -1)
+          test -n "$deploy"
+          "$deploy" "$app" -always-overwrite
+          codesign --force --deep --sign - "$app"
+          lipo -verify_arch arm64 x86_64 "$app/Contents/MacOS/ASCII VISOR Setup"
+          QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
+          ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
       - uses: actions/upload-artifact@v4
         with:
           name: ascii-visor-macos-universal-preview
-          path: ascii-visor-macos-universal-preview.zip
+          path: ascii-visor-macos-*-preview.zip
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-test-results
+          path: test-results/
