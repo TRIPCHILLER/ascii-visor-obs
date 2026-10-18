@@ -6,6 +6,7 @@
 #include <QProcess>
 #include <QTemporaryDir>
 #include <stdexcept>
+#include <obs-config.h>
 
 static QByteArray readFile(const QString &path) {
  QFile f(path);if(!f.open(QIODevice::ReadOnly))throw std::runtime_error(("Cannot read: "+path).toStdString());return f.readAll();
@@ -86,7 +87,7 @@ class Setup:public QWidget {
 #else
   "Linux x86_64"
 #endif
-  );text.replace("32.2.2","31+ · PREVIEW");intro->setText(text);
+  );text.replace("32.2.2",QString("%1.%2+ · PREVIEW").arg(LIBOBS_API_MAJOR_VER).arg(LIBOBS_API_MINOR_VER));intro->setText(text);
   install->setText(l("Install"));cancel->setText(l(complete?"Finish":"Cancel"));
   license->setText(l("License"));QString credit=l("Credits");credit.replace(QString::fromUtf8("⛶ "),QString());credits->setText(credit);launch->setText(l("Launch"));
   int previous=launchMode->currentIndex();launchMode->clear();launchMode->addItem(l("DirectOBS"),"direct");
@@ -114,8 +115,10 @@ class Setup:public QWidget {
 #endif
    if(!version.waitForFinished(15000)||version.exitCode()!=0)fail("Cannot identify OBS. Select your OBS installation.");
    QString output=QString::fromUtf8(version.readAllStandardOutput()+version.readAllStandardError());
-   auto match=QRegularExpression("(\\d+)\\.\\d+").match(output);
-   if(!match.hasMatch()||match.captured(1).toInt()<31)fail("OBS Studio 31 or newer is required for this preview.");
+   auto match=QRegularExpression("(\\d+)\\.(\\d+)").match(output);
+   int selectedVersion=match.hasMatch()?match.captured(1).toInt()*65536+match.captured(2).toInt():0;
+   if(selectedVersion<LIBOBS_API_MAJOR_VER*65536+LIBOBS_API_MINOR_VER)
+    fail(QString("OBS Studio ≥ %1.%2").arg(LIBOBS_API_MAJOR_VER).arg(LIBOBS_API_MINOR_VER));
    selectedOBS=obsPath->text();
    const QString root=QDir::cleanPath(targetRoot());
    if(!QDir::isAbsolutePath(root)||root=="/"||root==QDir::homePath())fail("Choose an OBS plugins directory.");

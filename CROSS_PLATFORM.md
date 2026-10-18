@@ -26,8 +26,8 @@ macOS does not offer a Windows portable/Steam layout.
 
 ## Installation behaviour
 
-Close OBS before installing. The setup checks the selected OBS version (31+ for
-the preview), validates every payload file against its SHA-256 manifest, stages
+Close OBS before installing. The setup checks the selected OBS version against the actual SDK API (Linux 32.2+, macOS 31.1+ for
+these previews), validates every payload file against its SHA-256 manifest, stages
 files in the destination filesystem, and renames the previous plugin to a
 unique `.visor-backup-*` directory. A failed final rename restores the old
 plugin. Scenes, profiles, presets, and other OBS plugins are not edited.
@@ -69,6 +69,7 @@ stability hysteresis, and alpha-compositing logic remain shared.
 
 The CMake infrastructure is adapted from the official OBS plugin template at
 commit `3e7d7ac3b5342cd7d9b88890b9c70b472d1520fc`, under GPL-2.0-or-later.
+The matching macdeployqt deployment tool is built from three checksum-verified Qt 6.8.3 source files; it is not included in user packages.
 Its pinned macOS SDK configuration uses OBS 31.1.1 and obs-deps 2025-07-11,
 including published dependency checksums. Runtime regression testing uses OBS
 32.2.2. The Linux job uses the official OBS PPA and records the installed version
