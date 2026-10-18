@@ -41,7 +41,7 @@ static void verifyPayload(const QString &root){
 class Setup:public QWidget {
  QJsonObject all;QString resources,code,backup,selectedOBS;
  QLabel *heading,*intro,*detail,*license,*credits,*logo;
- QComboBox *languages,*mode;QLineEdit *custom;QPushButton *browse,*install,*cancel;
+ QComboBox *languages,*mode,*launchMode;QLineEdit *custom,*obsPath;QPushButton *browse,*install,*cancel,*chooseOBS;
  QCheckBox *launch;bool complete=false;
  QString l(const char *key)const{return all[code].toObject()[key].toString();}
  QString targetRoot()const {
@@ -65,6 +65,11 @@ class Setup:public QWidget {
   );text.replace("32.2.2","31+ · PREVIEW");intro->setText(text);
   install->setText(l("Install"));cancel->setText(l(complete?"Finish":"Cancel"));
   license->setText(l("License"));credits->setText(l("Credits"));launch->setText(l("Launch"));
+  int previous=launchMode->currentIndex();launchMode->clear();launchMode->addItem(l("DirectOBS"),"direct");
+#ifndef Q_OS_MACOS
+  if(mode->currentData().toString()!="flatpak"&&!QStandardPaths::findExecutable("steam").isEmpty())launchMode->addItem(l("SteamOBS"),"steam");
+#endif
+  launchMode->setCurrentIndex(qMax(0,qMin(previous,launchMode->count()-1)));
   if(complete)detail->setText(l("DoneInfo")+"\n"+l("Backup")+" "+backup);
   else detail->setText(l("Destination")+"\n"+targetRoot()+"\n\n"+l("BackupNotice"));
  }
@@ -73,6 +78,21 @@ class Setup:public QWidget {
    for(const QString &name:{QString("obs"),QString("OBS")}){
     QProcess p;p.start("pgrep",{"-x",name});p.waitForFinished();if(p.exitCode()==0)fail(l("CloseOBS"));
    }
+   QProcess version;
+#ifdef Q_OS_MACOS
+   const QString app=obsPath->text();
+   version.start("/usr/libexec/PlistBuddy",{"-c","Print:CFBundleIdentifier",app+"/Contents/Info.plist"});version.waitForFinished();
+   if(version.readAllStandardOutput().trimmed()!="com.obsproject.obs-studio")fail("Select the OBS Studio application.");
+   version.start("/usr/libexec/PlistBuddy",{"-c","Print:CFBundleShortVersionString",app+"/Contents/Info.plist"});
+#else
+   if(mode->currentData().toString()=="flatpak")version.start("flatpak",{"run","com.obsproject.Studio","--version"});
+   else version.start(obsPath->text(),{"--version"});
+#endif
+   if(!version.waitForFinished(15000)||version.exitCode()!=0)fail("Cannot identify OBS. Select your OBS installation.");
+   QString output=QString::fromUtf8(version.readAllStandardOutput()+version.readAllStandardError());
+   auto match=QRegularExpression("(\\d+)\\.\\d+").match(output);
+   if(!match.hasMatch()||match.captured(1).toInt()<31)fail("OBS Studio 31 or newer is required for this preview.");
+   selectedOBS=obsPath->text();
    const QString root=QDir::cleanPath(targetRoot());
    if(!QDir::isAbsolutePath(root)||root=="/"||root==QDir::homePath())fail("Choose an OBS plugins directory.");
    const QString payload=resources+"/payload";verifyPayload(payload);
@@ -103,7 +123,7 @@ class Setup:public QWidget {
     if(!backup.isEmpty()&&!QDir().rename(backup,destination))fail("Install and rollback failed. Backup: "+backup);
     fail("Install failed; previous plugin restored.");
    }
-   complete=true;mode->hide();custom->hide();browse->hide();install->hide();launch->show();updateText();
+   complete=true;mode->hide();custom->hide();browse->hide();obsPath->hide();chooseOBS->hide();install->hide();launch->show();launchMode->show();updateText();
   }catch(const std::exception &e){QMessageBox::critical(this,"ASCII VISOR",l("InstallerError")+"\n"+QString::fromUtf8(e.what()));}
  }
 public:
@@ -122,7 +142,7 @@ public:
   auto *top=new QHBoxLayout;heading=new QLabel;QFont font=heading->font();font.setPointSize(19);font.setBold(true);heading->setFont(font);heading->setWordWrap(true);top->addWidget(heading,1);
   logo=new QLabel;logo->setPixmap(QPixmap(resources+"/installer-icon.png").scaled(48,48,Qt::KeepAspectRatio,Qt::SmoothTransformation));top->addWidget(logo);
   languages=new QComboBox;const QStringList codes={"ru-RU","en-US","es-ES","pt-BR","de-DE","fr-FR","ja-JP","ko-KR","zh-CN","zh-TW"};
-  for(const auto &c:codes)languages->addItem(all[c].toObject()["Name"].toString(),c);
+  for(const auto &c:codes)languages->addItem(QIcon(resources+"/flags/"+c+".png"),all[c].toObject()["Name"].toString(),c);
   QString system=QLocale::system().name();system.replace('_','-');int index=codes.indexOf(system);if(index<0)index=1;languages->setCurrentIndex(index);code=codes[index];top->addWidget(languages);layout->addLayout(top);
   intro=new QLabel;intro->setWordWrap(true);layout->addWidget(intro);
   mode=new QComboBox;
@@ -132,23 +152,39 @@ public:
   mode->addItem("OBS Studio · Native / Steam","native");mode->addItem("OBS Studio · Flatpak","flatpak");
 #endif
   mode->addItem("OBS Studio · …","custom");layout->addWidget(mode);
+  auto *obsPick=new QHBoxLayout;obsPath=new QLineEdit;
+#ifdef Q_OS_MACOS
+  obsPath->setText(QFileInfo::exists("/Applications/OBS.app")?"/Applications/OBS.app":QDir::homePath()+"/Applications/OBS.app");
+#else
+  obsPath->setText(QStandardPaths::findExecutable("obs"));
+#endif
+  chooseOBS=new QPushButton("OBS…");obsPick->addWidget(obsPath);obsPick->addWidget(chooseOBS);layout->addLayout(obsPick);
   auto *pick=new QHBoxLayout;custom=new QLineEdit;custom->setPlaceholderText("OBS plugins directory");custom->setVisible(false);browse=new QPushButton("…");browse->setVisible(false);pick->addWidget(custom);pick->addWidget(browse);layout->addLayout(pick);
   detail=new QLabel;detail->setWordWrap(true);layout->addWidget(detail,1);license=new QLabel;license->setWordWrap(true);layout->addWidget(license);
-  launch=new QCheckBox;launch->hide();layout->addWidget(launch);
+  launch=new QCheckBox;launch->hide();layout->addWidget(launch);launchMode=new QComboBox;launchMode->hide();layout->addWidget(launchMode);
   auto *bottom=new QHBoxLayout;credits=new QLabel;credits->setWordWrap(true);credits->setStyleSheet("color:#777;font-size:11px");bottom->addWidget(credits,1);
   install=new QPushButton;cancel=new QPushButton;bottom->addWidget(install);bottom->addWidget(cancel);layout->addLayout(bottom);
   connect(languages,&QComboBox::currentIndexChanged,this,[this]{code=languages->currentData().toString();updateText();});
-  connect(mode,&QComboBox::currentIndexChanged,this,[this]{bool c=mode->currentData().toString()=="custom";custom->setVisible(c);browse->setVisible(c);updateText();});
+  connect(mode,&QComboBox::currentIndexChanged,this,[this]{bool c=mode->currentData().toString()=="custom";custom->setVisible(c);browse->setVisible(c);obsPath->setEnabled(mode->currentData().toString()!="flatpak");chooseOBS->setEnabled(obsPath->isEnabled());updateText();});
+  connect(chooseOBS,&QPushButton::clicked,this,[this]{
+#ifdef Q_OS_MACOS
+   QString path=QFileDialog::getExistingDirectory(this,"OBS Studio","/Applications");
+#else
+   QString path=QFileDialog::getOpenFileName(this,"OBS Studio",QFileInfo(obsPath->text()).absolutePath());
+#endif
+   if(!path.isEmpty())obsPath->setText(path);
+  });
   connect(custom,&QLineEdit::textChanged,this,[this]{updateText();});
   connect(browse,&QPushButton::clicked,this,[this]{auto p=QFileDialog::getExistingDirectory(this,l("Destination"),QDir::homePath());if(!p.isEmpty())custom->setText(p);});
   connect(install,&QPushButton::clicked,this,[this]{doInstall();});
   connect(cancel,&QPushButton::clicked,this,[this]{
    if(complete&&launch->isChecked()){
 #ifdef Q_OS_MACOS
-    QProcess::startDetached("/usr/bin/open",{"-a","OBS"});
+    QProcess::startDetached("/usr/bin/open",{"-a",selectedOBS});
 #else
     if(mode->currentData().toString()=="flatpak")QProcess::startDetached("flatpak",{"run","com.obsproject.Studio"});
-    else QProcess::startDetached("obs",{});
+    else if(launchMode->currentData().toString()=="steam")QProcess::startDetached("steam",{"steam://run/1905180"});
+    else QProcess::startDetached(selectedOBS,{});
 #endif
    }close();
   });updateText();
@@ -160,6 +196,13 @@ int main(int argc,char **argv){
 #ifdef Q_OS_MACOS
  root=QDir(root+"/../Resources").absolutePath();
 #endif
+ const QString fontRoot=root+"/payload/"+
+#ifdef Q_OS_MACOS
+ "ascii-visor.plugin/Contents/Resources/fonts/";
+#else
+ "ascii-visor/data/fonts/";
+#endif
+ QFontDatabase::addApplicationFont(fontRoot+"NotoSansMonoCJKjp-Regular.otf");
  try{Setup window(root);window.show();
   if(argc==3&&QString::fromLocal8Bit(argv[1])=="--preview"){
    QTimer::singleShot(200,&app,[&]{window.preview(QString::fromLocal8Bit(argv[2]));app.quit();});

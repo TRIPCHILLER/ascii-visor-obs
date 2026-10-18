@@ -1,6 +1,10 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#elif defined(__APPLE__)
+#import <Cocoa/Cocoa.h>
+#include <util/platform.h>
+#define Sleep os_sleep_ms
 #else
 #include <obs-nix-platform.h>
 #include <X11/Xlib.h>
@@ -76,6 +80,11 @@ int main(int argc,char **argv){
  snprintf(graphics,sizeof(graphics),"%s/bin/64bit/libobs-d3d11.dll",argv[3]);
  MultiByteToWideChar(CP_UTF8,0,obsbin,-1,obsbin_w,2048);
  SetErrorMode(SEM_NOGPFAULTERRORBOX);SetDllDirectoryW(obsbin_w);
+#elif defined(__APPLE__)
+ [NSApplication sharedApplication];
+ char obsdata[2048],graphics[2048];
+ snprintf(obsdata,sizeof(obsdata),"%s",getenv("VISOR_TEST_OBSDATA"));
+ snprintf(graphics,sizeof(graphics),"%s",getenv("VISOR_TEST_GRAPHICS"));
 #else
  const char *obsdata="/usr/share/obs/libobs/",*graphics="libobs-opengl";
  obs_set_nix_platform(OBS_NIX_PLATFORM_X11_EGL);
@@ -91,6 +100,8 @@ int main(int argc,char **argv){
  char dll[2048],data[2048];
 #ifdef _WIN32
  snprintf(dll,sizeof(dll),"%s/build/ascii-visor.dll",argv[1]);
+#elif defined(__APPLE__)
+ snprintf(dll,sizeof(dll),"%s/build_macos/RelWithDebInfo/ascii-visor.plugin/Contents/MacOS/ascii-visor",argv[1]);
 #else
  snprintf(dll,sizeof(dll),"%s/build_x86_64/ascii-visor.so",argv[1]);
 #endif
