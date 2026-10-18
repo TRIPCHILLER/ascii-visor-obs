@@ -52,13 +52,32 @@ jobs:
           name: linux-test-results
           path: test-results/
   macos:
-    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - run: cmake --preset macos -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
       - run: cmake --build --preset macos --parallel 4
       - run: ctest --test-dir build_macos -C RelWithDebInfo --output-on-failure
+      - name: Test actual OBS 32.2.2 rendering on native CPU
+        run: |
+          variant=Apple
+          if [[ "$RUNNER_ARCH" == X64 ]]; then variant=Intel; fi
+          curl -fL --retry 3 "https://github.com/obsproject/obs-studio/releases/download/32.2.2/OBS-Studio-32.2.2-macOS-${variant}.dmg" -o obs.dmg
+          hdiutil attach obs.dmg -nobrowse -mountpoint "$PWD/obs-volume"
+          ditto "$PWD/obs-volume/OBS.app" "$PWD/obs-runtime/OBS.app"
+          hdiutil detach "$PWD/obs-volume"
+          find obs-runtime/OBS.app -iname '*opengl*' -o -name default.effect
+          mkdir -p test-results
+          export DYLD_FRAMEWORK_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
+          export VISOR_TEST_GRAPHICS=$(find "$PWD/obs-runtime/OBS.app" -type f -name libobs-opengl -print -quit)
+          export VISOR_TEST_OBSDATA=$(dirname "$(find "$PWD/obs-runtime/OBS.app" -name default.effect -print -quit)")
+          test -n "$VISOR_TEST_GRAPHICS"
+          ./build_macos/RelWithDebInfo/visor-transparency-test "$PWD" "$PWD/test-results/composite" "$PWD/obs-runtime/OBS.app"
       - name: Inspect and package universal preview
         run: |
           bundle=build_macos/RelWithDebInfo/ascii-visor.plugin
@@ -72,7 +91,9 @@ jobs:
           python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
           deploy=build_macos/installer/native/RelWithDebInfo/visor-macdeployqt
           test -x "$deploy"
-          "$deploy" "$app" -always-overwrite
+          qtcore=$(find "$PWD/.deps" -path '*/lib/QtCore.framework' -type d -print -quit)
+          test -n "$qtcore"
+          DYLD_FRAMEWORK_PATH="$(dirname "$qtcore")" "$deploy" "$app" -always-overwrite -libpath="$(dirname "$qtcore")" -verbose=2
           codesign --force --deep --sign - "$app"
           lipo "$app/Contents/MacOS/ASCII VISOR Setup" -verify_arch arm64 x86_64
           QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
@@ -80,24 +101,11 @@ jobs:
           ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: ascii-visor-macos-universal-preview
+          name: ascii-visor-macos-universal-preview-${{ matrix.os }}
           path: ascii-visor-macos-*-preview.zip
           if-no-files-found: error
-      - name: Test actual OBS 32.2.2 rendering on Apple Silicon
-        run: |
-          curl -fL --retry 3 https://github.com/obsproject/obs-studio/releases/download/32.2.2/OBS-Studio-32.2.2-macOS-Apple.dmg -o obs.dmg
-          hdiutil attach obs.dmg -nobrowse -mountpoint "$PWD/obs-volume"
-          ditto "$PWD/obs-volume/OBS.app" "$PWD/obs-runtime/OBS.app"
-          hdiutil detach "$PWD/obs-volume"
-          find obs-runtime/OBS.app -iname '*opengl*' -o -name default.effect
-          mkdir -p test-results
-          export DYLD_FRAMEWORK_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
-          export VISOR_TEST_GRAPHICS=$(find "$PWD/obs-runtime/OBS.app" -type f -name libobs-opengl -print -quit)
-          export VISOR_TEST_OBSDATA=$(dirname "$(find "$PWD/obs-runtime/OBS.app" -name default.effect -print -quit)")
-          test -n "$VISOR_TEST_GRAPHICS"
-          ./build_macos/RelWithDebInfo/visor-transparency-test "$PWD" "$PWD/test-results/composite" "$PWD/obs-runtime/OBS.app"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: macos-test-results
+          name: macos-test-results-${{ matrix.os }}
           path: test-results/
