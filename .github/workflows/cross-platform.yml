@@ -88,13 +88,15 @@ jobs:
           ditto -c -k --keepParent "$bundle" ascii-visor-macos-universal-preview.zip
           app='build_macos/installer/native/RelWithDebInfo/ASCII VISOR Setup.app'
           test -d "$app"
-          python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
           deploy=build_macos/installer/native/RelWithDebInfo/visor-macdeployqt
           test -x "$deploy"
           qtcore=$(find "$PWD/.deps" -path '*/lib/QtCore.framework' -type d -print -quit)
           test -n "$qtcore"
           DYLD_FRAMEWORK_PATH="$(dirname "$qtcore")" "$deploy" "$app" -always-overwrite -libpath="$(dirname "$qtcore")" -verbose=2
           codesign --force --deep --sign - "$app"
+          python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
+          codesign --force --sign - "$app"
+          codesign --verify --deep --strict "$app"
           lipo "$app/Contents/MacOS/ASCII VISOR Setup" -verify_arch arm64 x86_64
           QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
           QT_QPA_PLATFORM=offscreen "$app/Contents/MacOS/ASCII VISOR Setup" --self-test

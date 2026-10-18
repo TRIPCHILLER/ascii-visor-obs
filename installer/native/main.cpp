@@ -88,7 +88,7 @@ class Setup:public QWidget {
 #endif
   );text.replace("32.2.2","31+ · PREVIEW");intro->setText(text);
   install->setText(l("Install"));cancel->setText(l(complete?"Finish":"Cancel"));
-  license->setText(l("License"));credits->setText(l("Credits"));launch->setText(l("Launch"));
+  license->setText(l("License"));QString credit=l("Credits");credit.replace(QString::fromUtf8("⛶ "),QString());credits->setText(credit);launch->setText(l("Launch"));
   int previous=launchMode->currentIndex();launchMode->clear();launchMode->addItem(l("DirectOBS"),"direct");
 #ifndef Q_OS_MACOS
   if(mode->currentData().toString()!="flatpak"&&!QStandardPaths::findExecutable("steam").isEmpty())launchMode->addItem(l("SteamOBS"),"steam");
@@ -150,7 +150,12 @@ public:
   logo=new QLabel;logo->setPixmap(QPixmap(resources+"/installer-icon.png").scaled(48,48,Qt::KeepAspectRatio,Qt::SmoothTransformation));top->addWidget(logo);
   languages=new QComboBox;const QStringList codes={"ru-RU","en-US","es-ES","pt-BR","de-DE","fr-FR","ja-JP","ko-KR","zh-CN","zh-TW"};
   for(const auto &c:codes)languages->addItem(QIcon(resources+"/flags/"+c+".png"),all[c].toObject()["Name"].toString(),c);
-  QString system=QLocale::system().name();system.replace('_','-');int index=codes.indexOf(system);if(index<0)index=1;languages->setCurrentIndex(index);code=codes[index];top->addWidget(languages);layout->addLayout(top);
+  QString system=QLocale::system().name();system.replace('_','-');
+  if(system.startsWith("zh"))system=QLocale::system().script()==QLocale::TraditionalHanScript?"zh-TW":"zh-CN";
+  int index=codes.indexOf(system);
+  if(index<0)for(int i=0;i<codes.size();i++)if(codes[i].left(2)==system.left(2)){index=i;break;}
+  if(index<0)index=1;
+  languages->setCurrentIndex(index);code=codes[index];top->addWidget(languages);layout->addLayout(top);
   intro=new QLabel;intro->setWordWrap(true);layout->addWidget(intro);
   mode=new QComboBox;
 #ifdef Q_OS_MACOS
@@ -186,13 +191,15 @@ public:
   connect(install,&QPushButton::clicked,this,[this]{doInstall();});
   connect(cancel,&QPushButton::clicked,this,[this]{
    if(complete&&launch->isChecked()){
+    bool started=false;
 #ifdef Q_OS_MACOS
-    QProcess::startDetached("/usr/bin/open",{"-a",selectedOBS});
+    started=QProcess::startDetached("/usr/bin/open",{"-a",selectedOBS});
 #else
-    if(mode->currentData().toString()=="flatpak")QProcess::startDetached("flatpak",{"run","com.obsproject.Studio"});
-    else if(launchMode->currentData().toString()=="steam")QProcess::startDetached("steam",{"steam://run/1905180"});
-    else QProcess::startDetached(selectedOBS,{});
+    if(mode->currentData().toString()=="flatpak")started=QProcess::startDetached("flatpak",{"run","com.obsproject.Studio"});
+    else if(launchMode->currentData().toString()=="steam")started=QProcess::startDetached("steam",{"steam://run/1905180"});
+    else started=QProcess::startDetached(selectedOBS,{});
 #endif
+    if(!started){QMessageBox::warning(this,"ASCII VISOR",l("LaunchError"));return;}
    }close();
   });updateText();
  }

@@ -7,6 +7,29 @@ set_target_properties(visor-setup PROPERTIES
   XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "-"
   XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED YES)
 if(APPLE)
+  set(iconset "${CMAKE_CURRENT_BINARY_DIR}/ascii-visor.iconset")
+  file(MAKE_DIRECTORY "${iconset}")
+  foreach(size IN ITEMS 16 32 128 256 512)
+    math(EXPR double_size "${size} * 2")
+    foreach(scale IN ITEMS 1 2)
+      if(scale EQUAL 1)
+        set(pixels ${size})
+        set(suffix "")
+      else()
+        set(pixels ${double_size})
+        set(suffix "@2x")
+      endif()
+      execute_process(COMMAND sips -z ${pixels} ${pixels}
+        "${CMAKE_CURRENT_SOURCE_DIR}/../branding/installer-icon.png"
+        --out "${iconset}/icon_${size}x${size}${suffix}.png"
+        COMMAND_ERROR_IS_FATAL ANY OUTPUT_QUIET)
+    endforeach()
+  endforeach()
+  set(icon_file "${CMAKE_CURRENT_BINARY_DIR}/ascii-visor.icns")
+  execute_process(COMMAND iconutil -c icns "${iconset}" -o "${icon_file}" COMMAND_ERROR_IS_FATAL ANY)
+  target_sources(visor-setup PRIVATE "${icon_file}")
+  set_source_files_properties("${icon_file}" PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+  set_target_properties(visor-setup PROPERTIES MACOSX_BUNDLE_ICON_FILE ascii-visor.icns)
   # OBS's minimal Qt SDK omits macdeployqt. Build the upstream deployment tool
   # against that SDK rather than mixing Qt frameworks from Homebrew.
   set(deploy_source "${CMAKE_CURRENT_BINARY_DIR}/macdeployqt-src")

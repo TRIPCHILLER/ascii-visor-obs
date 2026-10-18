@@ -356,7 +356,7 @@ bool obs_module_load(void) {
  for(int i=0;i<2;i++){char *p=obs_module_file(names[i]);if(p){MultiByteToWideChar(CP_UTF8,0,p,-1,font_paths[i],MAX_PATH);
   if(!AddFontResourceExW(font_paths[i],FR_PRIVATE,NULL))blog(LOG_WARNING,"[ASCII VISOR] Cannot load private font %s",p);bfree(p);}}
 #endif
- obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.2.8 registered");return true;
+ obs_register_source(&info);blog(LOG_INFO,"[ASCII VISOR] Native live GPU filter 0.3.0-preview registered");return true;
 }
 void obs_module_unload(void) {
 #ifdef _WIN32
