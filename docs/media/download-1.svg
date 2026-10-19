@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="220" height="58" viewBox="0 0 220 58">
   <title>Linux x86_64</title>
   <rect x="1" y="1" width="218" height="56" rx="9" fill="#16232d" stroke="#87cafa" stroke-width="2"/>
-  <g transform="translate(10 12) scale(.8)" fill="#9cd7ff">
+  <g transform="translate(13.778 12.111) scale(.888889)" fill="#9cd7ff">
     <path d="M16 1C10 1 7.5 5.5 8 12L7.5 16C4 20 1.5 24 2 27c.3 2 2 2.8 4 1.5l1.5-1C7.8 32 11 35 16 35s8.2-3 8.5-7.5l1.5 1c2 1.3 3.7.5 4-1.5.5-3-2-7-5.5-11L24 12C24.5 5.5 22 1 16 1Z"/>
     <ellipse cx="16" cy="24" rx="6.5" ry="9" fill="#16232d"/>
     <ellipse cx="12.5" cy="10" rx="2.4" ry="3.4" fill="#16232d"/>
@@ -11,6 +11,6 @@
     <path d="m10.5 14 5.5-3 5.5 3-5.5 3.5Z" fill="#16232d"/>
     <path d="m12.5 14 3.5 2.2 3.5-2.2ZM8 31l6 2v4H3q-3-1-1-3Zm16 0-6 2v4h11q3-1 1-3Z"/>
   </g>
-  <text x="42" y="25" fill="#ffffff" font-family="Arial,sans-serif" font-size="17" font-weight="bold">Linux</text>
-  <text x="42" y="43" fill="#c4dbea" font-family="Arial,sans-serif" font-size="12">x86_64 · AppImage</text>
+  <text x="54" y="25" fill="#ffffff" font-family="Arial,sans-serif" font-size="17" font-weight="bold">Linux</text>
+  <text x="54" y="43" fill="#c4dbea" font-family="Arial,sans-serif" font-size="12">x86_64 · AppImage</text>
 </svg>
