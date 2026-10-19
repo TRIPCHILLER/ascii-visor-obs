@@ -8,9 +8,11 @@
 
 <p align="center"><a href="README.md"><img src="docs/media/flags/us.svg" width="24" height="16" alt="US"> English</a> · <a href="README.ru.md"><img src="docs/media/flags/ru.svg" width="24" height="16" alt="RU"> Русский</a> · <a href="README.es.md"><img src="docs/media/flags/es.svg" width="24" height="16" alt="ES"> Español</a> · <a href="README.pt-BR.md"><img src="docs/media/flags/br.svg" width="24" height="16" alt="BR"> Português (Brasil)</a> · <a href="README.de.md"><img src="docs/media/flags/de.svg" width="24" height="16" alt="DE"> Deutsch</a> · <a href="README.fr.md"><img src="docs/media/flags/fr.svg" width="24" height="16" alt="FR"> Français</a> · <a href="README.ja.md"><img src="docs/media/flags/jp.svg" width="24" height="16" alt="JP"> 日本語</a> · <b><img src="docs/media/flags/kr.svg" width="24" height="16" alt="KR"> 한국어</b> · <a href="README.zh-CN.md"><img src="docs/media/flags/cn.svg" width="24" height="16" alt="CN"> 简体中文</a> · <a href="README.zh-TW.md"><img src="docs/media/flags/tw.svg" width="24" height="16" alt="TW"> 繁體中文</a></p>
 
-<p align="center"><b>Windows x64 · <a href="https://obsproject.com/">OBS Studio</a> 32.2.2에서 검증 · 일반 및 Steam 버전 · 무료</b></p>
+<p align="center"><b>Windows · Linux · macOS · 0.3.1-rc1</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ 설치 프로그램 다운로드</b></a> · <a href="#-빠른-시작">🚀 빠른 시작</a> · <a href="https://boosty.to/tripchiller">☕ 제작자 후원</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Windows-x64-Setup.exe"><img src="docs/media/download-0.svg" width="220" height="58" alt="다운로드 · Windows x64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.AppImage"><img src="docs/media/download-1.svg" width="220" height="58" alt="다운로드 · Linux x86_64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-macOS-universal-Setup.zip"><img src="docs/media/download-2.svg" width="220" height="58" alt="다운로드 · macOS · Apple Silicon + Intel"></a></p>
+
+<p align="center">0.3.1-rc1은 출시 후보 버전입니다. 다운로드 링크는 릴리스 게시 후 사용할 수 있습니다. <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.2.8">0.2.8 · Windows</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -42,11 +44,11 @@ https://github.com/user-attachments/assets/30c21fb0-9aad-4652-9b45-b2c97a04a234
 
 ### 🔤 문자 세트와 사용자 입력
 
-좋아하는 팔레트를 유지하면서 **10개 세트**를 골라 보세요. 클래식 ASCII, 다양한 문자 체계, 숫자와 기하학적 모양이 서로 다른 질감을 만듭니다.
+좋아하는 팔레트를 유지하면서 **8개 세트**를 골라 보세요. 클래식 ASCII, 다양한 문자 체계, 숫자와 기하학적 모양이 서로 다른 질감을 만듭니다.
 
 https://github.com/user-attachments/assets/8ed8da50-d899-492f-a81a-4ccff01a9210
 
-나만의 화면을 원하나요? **사용자 지정**을 선택하고 원하는 문자를 입력하세요. 조합을 바꾸며 자신만의 스타일을 찾아보세요.
+나만의 화면을 원하나요? **직접 입력**을 선택하고 원하는 문자를 입력하세요. 조합을 바꾸며 자신만의 스타일을 찾아보세요.
 
 https://github.com/user-attachments/assets/067aa13c-cada-4ff3-859d-4025b0b72c82
 
@@ -68,27 +70,21 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 빠른 시작
 
-1. 위 링크 또는 릴리스의 **Assets**에서 **ASCII-VISOR-0.2.8-Setup.exe**를 다운로드하세요.
-2. OBS 창을 모두 닫고 설치 프로그램을 실행하세요.
-3. **일반 OBS / Steam — 공통 설치**를 선택하세요. 포터블 OBS는 해당 옵션과 폴더를 선택하세요.
-4. OBS를 열고 카메라나 다른 영상 소스를 선택하세요.
-5. 소스 우클릭 → **필터 → 효과 필터 → + → ASCII ⛶ VISOR**.
-6. 필터 목록에서 플러그인 이름을 클릭해 설정을 여세요. 문자, 색상, 밀도를 취향대로 바꾸며 즐겁게 실험해 보세요!
+위에서 운영체제를 선택하세요. OBS를 종료하고 설치 프로그램을 실행한 뒤 OBS → 소스 → 필터 → 효과 필터 → + → ASCII ⛶ VISOR를 선택하세요.
 
-https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+[설치 안내](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
-눈 아이콘으로 원본 영상과 비교할 수 있습니다. 설정 창을 닫아도 효과가 유지되며 OBS를 재시작해도 설정이 저장됩니다.
+<details>
+<summary>수동 설치 및 추가 패키지</summary>
 
-### 📦 어떤 파일을 받나요?
+- [ASCII-VISOR-0.3.1-rc1-Windows-x64-Plugin.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Windows-x64-Plugin.zip)
+- [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz)
+- [ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip)
+- [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
+- [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
+- Source code: GitHub ZIP / TAR.GZ
 
-| 파일 | 용도 |
-|---|---|
-| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | 권장. 일반, Steam, 포터블 OBS에 설치하고 필요한 폴더를 자동으로 만듭니다. |
-| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | 일반 및 Steam OBS 수동 설치용. |
-| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | 포터블 OBS 수동 설치용. |
-| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | 개발자용 소스 코드. 플러그인 사용에는 필요하지 않습니다. |
-
-수동 설치, 업데이트, 제거: [INSTALL.md](INSTALL.md).
+</details>
 
 ## 🌍 인터페이스 10개 언어
 
@@ -111,9 +107,9 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 
 ## 💻 호환성
 
-**Windows x64 및 [OBS Studio](https://obsproject.com/) 32.2.2**의 일반, Steam, 포터블 설치에서 검증했습니다. OBS는 별도로 설치해야 합니다.
+Windows x64, Linux x86_64 (Ubuntu 24.04 / glibc 2.39 이상), macOS universal (Apple Silicon 및 Intel). OBS는 별도 설치해야 합니다. OBS 32.2.2에서 테스트합니다. macOS는 임시 서명이며 공증되지 않았습니다. Linux Flatpak에는 호환되는 OBS 런타임이 필요합니다. 자세한 내용은 안내를 참조하세요.
 
-제작자가 일반 및 Steam OBS에서 업데이트, 새 설치, 실행, 설정 저장과 후원 링크를 확인했습니다. 다른 OBS 버전, macOS와 Linux는 아직 검증하지 않았습니다.
+[설치 안내](docs/INSTALL.en.md)
 
 ## ☕ 프로젝트 후원
 

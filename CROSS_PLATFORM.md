@@ -1,6 +1,6 @@
 # ASCII VISOR: cross-platform preview
 
-This branch prepares 0.3.0. The published Windows release remains 0.2.8.
+This branch prepares 0.3.1-rc1. The published Windows release remains 0.2.8.
 Do not describe these previews as a fully tested stable release.
 
 ## Packages
@@ -56,13 +56,15 @@ https://github.com/obsproject/obs-plugintemplate/wiki/Codesigning-On-macOS
 
 ## Rendering changes
 
-Windows retains private GDI fonts. Linux/macOS use statically linked FreeType
+Katakana uses shared native pixel masks generated from PixelMplus12 Bold.
+Other text sets retain their baseline fonts. Windows retains private GDI fonts.
+Linux/macOS use statically linked FreeType
 2.13.3 and the same bundled Better VCR and Noto fonts. Fonts are never installed
 system-wide. Unicode parsing accepts scalar values, deduplicates characters,
 rejects invalid UTF-8, and preserves stable density sorting. Missing glyphs are
 reported in the OBS log. Different rasterizers can produce small visual
 differences; exact pixel equality with GDI is not promised.
-PIXEL2/DOTS2 shapes and the GPU shaders, filter identifier, palettes, settings,
+Approved procedural PIXEL/DOTS shapes and the GPU shaders, filter identifier, palettes, settings,
 stability hysteresis, and alpha-compositing logic remain shared.
 
 ## Building
@@ -116,7 +118,7 @@ release. FreeType's FTL notice is included with installer resources.
 
 ## Release checklist
 
-1. Confirm Linux native OBS load, all 11 character sets, custom Cyrillic/CJK,
+1. Confirm Linux native OBS load, all eight built-in character sets plus custom input, custom Cyrillic/CJK,
    transparency over another source, stability, FPS caching, palette save/delete.
 2. Repeat on both a real Apple Silicon Mac and an Intel Mac. A universal binary
    architecture check alone does not establish rendering on both CPUs.
@@ -126,8 +128,9 @@ release. FreeType's FTL notice is included with installer resources.
    platform selection. This does not cover all desktop compositors or GPU drivers.
 4. Review all ten installer language screenshots and test fresh install,
    upgrade, backup restore and optional launching in interactive OBS sessions.
-5. Sign/notarize Mac release packages, pin deployment tools, include license
-   notices, and only then update the public platform badges/release notes.
+5. Before a stable release, configure Developer ID/notarization and pin deployment
+   tools. This release candidate uses disclosed ad-hoc signatures. Keep all license
+   notices and obtain approval before publishing its release or updating main.
 
 No camera, personal media, real OBS profile, or production installation is used
 by the synthetic rendering and installer filesystem tests.
@@ -156,3 +159,22 @@ and fractional scaling differences, plus native/Steam installation locations.
 The filter itself does not link Qt; the AppImage Qt fix concerns the installer.
 Retest the new AppImage on the original tester's desktop before calling this
 specific user's failure resolved.
+
+## 0.3.1 candidate scope (2026-10-19)
+
+Only approved Katakana (PixelMplus12 Bold masks), procedural PIXEL and DOTS,
+legacy preset migration, and the localized custom input labels are updated.
+The original CLASSIC, NUMBERS, LATIN, CYRILLIC, BLOCKS and custom renderer are
+retained; experimental font, size and randomization changes are not included.
+PIXEL/DOTS have one menu entry each. The Katakana mask generator and font license
+are included. Original Windows rendering is compared against 40 GPU captures.
+
+The user reported the preceding macOS preview installed successfully on a real
+Mac with functional controls and language switching. This feedback covers that
+preview; the new candidate is built and tested separately. Linux feedback and
+its Wayland packaging correction remain the basis for the Linux candidate.
+
+Candidate artifacts: Actions run 39314704984, source commit
+`c1e897b4e5890110e807d1cf66ac8d020250f54c`. Installer archives now use explicit
+version, platform and architecture filenames. See docs/INSTALL.en.md and
+docs/INSTALL.ru.md. No release, tag or main update is performed by the workflow.

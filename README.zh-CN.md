@@ -8,9 +8,11 @@
 
 <p align="center"><a href="README.md"><img src="docs/media/flags/us.svg" width="24" height="16" alt="US"> English</a> · <a href="README.ru.md"><img src="docs/media/flags/ru.svg" width="24" height="16" alt="RU"> Русский</a> · <a href="README.es.md"><img src="docs/media/flags/es.svg" width="24" height="16" alt="ES"> Español</a> · <a href="README.pt-BR.md"><img src="docs/media/flags/br.svg" width="24" height="16" alt="BR"> Português (Brasil)</a> · <a href="README.de.md"><img src="docs/media/flags/de.svg" width="24" height="16" alt="DE"> Deutsch</a> · <a href="README.fr.md"><img src="docs/media/flags/fr.svg" width="24" height="16" alt="FR"> Français</a> · <a href="README.ja.md"><img src="docs/media/flags/jp.svg" width="24" height="16" alt="JP"> 日本語</a> · <a href="README.ko.md"><img src="docs/media/flags/kr.svg" width="24" height="16" alt="KR"> 한국어</a> · <b><img src="docs/media/flags/cn.svg" width="24" height="16" alt="CN"> 简体中文</b> · <a href="README.zh-TW.md"><img src="docs/media/flags/tw.svg" width="24" height="16" alt="TW"> 繁體中文</a></p>
 
-<p align="center"><b>Windows x64 · 已在 <a href="https://obsproject.com/">OBS Studio</a> 32.2.2 测试 · 普通版与 Steam 版 · 免费</b></p>
+<p align="center"><b>Windows · Linux · macOS · 0.3.1-rc1</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/latest/download/ASCII-VISOR-0.2.8-Setup.exe"><b>⬇ 下载安装程序</b></a> · <a href="#-快速开始">🚀 快速开始</a> · <a href="https://boosty.to/tripchiller">☕ 支持作者</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Windows-x64-Setup.exe"><img src="docs/media/download-0.svg" width="220" height="58" alt="下载 · Windows x64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.AppImage"><img src="docs/media/download-1.svg" width="220" height="58" alt="下载 · Linux x86_64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-macOS-universal-Setup.zip"><img src="docs/media/download-2.svg" width="220" height="58" alt="下载 · macOS · Apple Silicon + Intel"></a></p>
+
+<p align="center">0.3.1-rc1 为候选版本。下载链接将在版本发布后生效。 <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.2.8">0.2.8 · Windows</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -24,7 +26,7 @@ ASCII 头像也是一种类似 VTuber 的出镜方式：用风格化形象代替
 
 | 功能 | 用途 |
 |---|---|
-| **10种预设字符集** | 使用经典 ASCII、其他字符和几何图形改变画面质感。 |
+| **8种预设字符集** | 使用经典 ASCII、其他字符和几何图形改变画面质感。 |
 | **自定义字符** | 输入自己的字符集，创造独特风格。 |
 | **20种配色方案** | 选择预设风格或调整自己的颜色。 |
 | **保存配色风格** | 每个滤镜最多保存20个自定义配色预设。 |
@@ -42,11 +44,11 @@ https://github.com/user-attachments/assets/30c21fb0-9aad-4652-9b45-b2c97a04a234
 
 ### 🔤 字符集与自定义输入
 
-保持喜欢的配色，从**10种预设字符集**中选择。经典 ASCII、其他字母、数字和几何图形都有各自独特的质感。
+保持喜欢的配色，从**8种预设字符集**中选择。经典 ASCII、其他字母、数字和几何图形都有各自独特的质感。
 
 https://github.com/user-attachments/assets/8ed8da50-d899-492f-a81a-4ccff01a9210
 
-想做出自己的风格？选择**自定义**，输入想使用的字符。尝试不同组合，找到喜欢的效果。
+想做出自己的风格？选择**自定义输入**，输入想使用的字符。尝试不同组合，找到喜欢的效果。
 
 https://github.com/user-attachments/assets/067aa13c-cada-4ff3-859d-4025b0b72c82
 
@@ -68,27 +70,21 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 快速开始
 
-1. 点击上方下载链接，或在发布页的 **Assets** 中下载 **ASCII-VISOR-0.2.8-Setup.exe**。
-2. 关闭所有 OBS 窗口，运行安装程序。
-3. 选择**普通 OBS / Steam — 共用安装**。便携版请选择对应选项和文件夹。
-4. 打开 OBS，选择摄像头或其他视频源。
-5. 右键点击视频源 → **滤镜 → 效果滤镜 → + → ASCII ⛶ VISOR**。
-6. 点击滤镜列表中的插件名称打开设置。按喜好调整字符、颜色和密度，尽情尝试！
+在上方选择系统。关闭 OBS，运行安装程序，然后打开 OBS → 来源 → 滤镜 → 效果滤镜 → + → ASCII ⛶ VISOR。
 
-https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+[安装指南](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
-点击眼睛图标可对比原始视频。关闭设置面板后效果仍然生效，重启 OBS 后设置也会保留。
+<details>
+<summary>手动安装和其他压缩包</summary>
 
-### 📦 应该下载哪个文件？
+- [ASCII-VISOR-0.3.1-rc1-Windows-x64-Plugin.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Windows-x64-Plugin.zip)
+- [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz)
+- [ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip)
+- [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
+- [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
+- Source code: GitHub ZIP / TAR.GZ
 
-| 文件 | 用途 |
-|---|---|
-| **[ASCII-VISOR-0.2.8-Setup.exe](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ASCII-VISOR-0.2.8-Setup.exe)** | 推荐。支持普通版、Steam版和便携版，并自动创建所需文件夹。 |
-| **[ascii-visor-0.2.8-windows-x64.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-windows-x64.zip)** | 普通版和Steam版的手动安装包。 |
-| **[ascii-visor-0.2.8-portable.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-portable.zip)** | 便携版的手动安装包。 |
-| **[ascii-visor-0.2.8-source.zip](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.2.8/ascii-visor-0.2.8-source.zip)** | 开发者使用的源代码，使用插件不需要下载。 |
-
-手动安装、更新和卸载：[INSTALL.md](INSTALL.md)。
+</details>
 
 ## 🌍 10种界面语言
 
@@ -111,9 +107,9 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 
 ## 💻 兼容性
 
-已在 **Windows x64 和 [OBS Studio](https://obsproject.com/) 32.2.2** 的普通版、Steam版和便携版中测试。OBS 需要单独安装。
+Windows x64；Linux x86_64（Ubuntu 24.04 / glibc 2.39 或更新版本）；macOS universal（Apple Silicon 和 Intel）。需单独安装 OBS。使用 OBS 32.2.2 测试。macOS 使用临时签名，未经 Apple 公证。Linux Flatpak 需要兼容的 OBS 运行环境。详情参见指南。
 
-作者已验证普通版和Steam版的覆盖安装、全新安装、启动、设置保存和支持链接。其他 OBS 版本、macOS 和 Linux 尚未验证。
+[安装指南](docs/INSTALL.en.md)
 
 ## ☕ 支持项目
 
