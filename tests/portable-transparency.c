@@ -114,14 +114,24 @@ snprintf(data,sizeof(data),"%s/data",argv[1]);
  obs_data_set_int(settings,"palette",-1);obs_data_set_int(settings,"fg",0xffc78a);obs_data_set_int(settings,"bg",0);
  obs_source_t *filter=obs_source_create_private("ascii_visor_filter","VISOR",settings);if(!source||!filter)return 6;
  obs_source_filter_add(source,filter);int failures=0;char path[2048];
+ obs_properties_t *props=obs_source_properties(filter);obs_property_t *charsets=obs_properties_get(props,"charset");
+ failures+=obs_property_list_item_count(charsets)!=9;
+ for(size_t i=0;i<obs_property_list_item_count(charsets);i++){
+  int id=(int)obs_property_list_item_int(charsets,i);failures+=id==5||id==6||id>10;
+ }
+ failures+=strcmp(obs_property_list_item_name(charsets,6),"Custom input")!=0;
+ failures+=strcmp(obs_property_description(obs_properties_get(props,"custom")),"Enter your own character set (up to 128 unique characters)")!=0;
+ obs_properties_destroy(props);
+
  obs_enter_graphics();set_pattern(false);obs_leave_graphics();
  obs_data_set_bool(settings,"transparent",false);obs_source_update(filter,settings);Sleep(100);
  obs_enter_graphics();snprintf(path,sizeof(path),"%s-opaque.ppm",argv[2]);failures+=capture(source,path,false,true,0);obs_leave_graphics();
  obs_data_set_bool(settings,"transparent",true);obs_source_update(filter,settings);Sleep(100);
  obs_enter_graphics();snprintf(path,sizeof(path),"%s-blank.ppm",argv[2]);failures+=capture(source,path,true,true,0);set_pattern(true);obs_leave_graphics();
- int sets[]={0,1,2,3,4,5,6,7,8,9,10};
+ int sets[]={0,1,2,3,4,7,8,9,10,5,6};
  for(int i=0;i<11;i++){
   obs_data_set_int(settings,"charset",sets[i]);obs_source_update(filter,settings);Sleep(100);
+  if(sets[i]==5||sets[i]==6){obs_data_t *saved=obs_source_get_settings(filter);failures+=obs_data_get_int(saved,"charset")!=(sets[i]==5?9:10);obs_data_release(saved);}
   obs_enter_graphics();snprintf(path,sizeof(path),"%s-set-%d.ppm",argv[2],sets[i]);failures+=capture(source,path,true,false,0);obs_leave_graphics();
  }
  obs_data_set_int(settings,"fps",1);obs_data_set_int(settings,"charset",0);obs_source_update(filter,settings);Sleep(100);

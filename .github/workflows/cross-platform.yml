@@ -1,4 +1,4 @@
-name: Cross-platform preview
+name: Cross-platform release candidate
 on:
   pull_request:
   workflow_dispatch:
@@ -39,12 +39,17 @@ jobs:
           QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --self-test
           tar -C preview/setup -czf ascii-visor-linux-setup-preview.tar.gz .
           bash installer/native/appimage.sh
+      - name: Name candidate downloads
+        run: |
+          mkdir -p release-files
+          cp ascii-visor-linux-setup-preview.AppImage release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.AppImage
+          cp ascii-visor-linux-setup-preview.tar.gz release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz
+          cp ascii-visor-linux-x86_64-preview.tar.gz release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz
+          (cd release-files && sha256sum * > SHA256SUMS-linux.txt)
       - uses: actions/upload-artifact@v4
         with:
-          name: ascii-visor-linux-x86_64-preview
-          path: |
-            ascii-visor-linux-*-preview.tar.gz
-            ascii-visor-linux-setup-preview.AppImage
+          name: ascii-visor-0.3.1-rc1-linux-x86_64
+          path: release-files/*
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
@@ -105,11 +110,18 @@ jobs:
           "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
           "$app/Contents/MacOS/ASCII VISOR Setup" --self-test
           ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
+      - name: Name candidate downloads
+        if: ${{ !cancelled() && steps.package.conclusion == 'success' }}
+        run: |
+          mkdir -p release-files
+          cp ascii-visor-macos-setup-preview.zip release-files/ASCII-VISOR-0.3.1-rc1-macOS-universal-Setup.zip
+          cp ascii-visor-macos-universal-preview.zip release-files/ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip
+          (cd release-files && shasum -a 256 * > SHA256SUMS-macos.txt)
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() && steps.package.conclusion == 'success' }}
         with:
-          name: ascii-visor-macos-universal-preview-${{ matrix.os }}
-          path: ascii-visor-macos-*-preview.zip
+          name: ascii-visor-0.3.1-rc1-macos-universal-${{ matrix.os }}
+          path: release-files/*
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()

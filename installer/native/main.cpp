@@ -87,7 +87,7 @@ class Setup:public QWidget {
 #else
   "Linux x86_64"
 #endif
-  );text.replace("32.2.2",QString("%1.%2+ · PREVIEW").arg(LIBOBS_API_MAJOR_VER).arg(LIBOBS_API_MINOR_VER));intro->setText(text);
+  );text.replace("32.2.2",QString("%1.%2+ · 0.3.1-rc1").arg(LIBOBS_API_MAJOR_VER).arg(LIBOBS_API_MINOR_VER));intro->setText(text);
   install->setText(l("Install"));cancel->setText(l(complete?"Finish":"Cancel"));
   license->setText(l("License"));QString credit=l("Credits");credit.replace(QString::fromUtf8("⛶ "),QString());credits->setText(credit);launch->setText(l("Launch"));
   int previous=launchMode->currentIndex();launchMode->clear();launchMode->addItem(l("DirectOBS"),"direct");
@@ -146,7 +146,7 @@ public:
  }
  explicit Setup(const QString &res):resources(res){
   all=QJsonDocument::fromJson(readFile(resources+"/locales.json")).object();
-  setWindowTitle("ASCII VISOR · OBS Edition · Setup Preview");resize(720,500);
+  setWindowTitle("ASCII VISOR · OBS Edition 0.3.1-rc1 · Setup");resize(720,500);
   setWindowIcon(QIcon(resources+"/installer-icon.png"));
   auto *layout=new QVBoxLayout(this);layout->setContentsMargins(26,24,26,20);layout->setSpacing(14);
   auto *top=new QHBoxLayout;heading=new QLabel;QFont font=heading->font();font.setPointSize(19);font.setBold(true);heading->setFont(font);heading->setWordWrap(true);top->addWidget(heading,1);
@@ -233,7 +233,7 @@ static void testInstall(const QString &resources){
 int main(int argc,char **argv){
  // Diagnostics must work even on a machine without a graphical session.
  if(argc==2&&QByteArray(argv[1])=="--version"){
-  qInfo("ASCII VISOR Setup 0.3.0-preview");return 0;
+  qInfo("ASCII VISOR Setup 0.3.1-rc1");return 0;
  }
  if(argc==2&&QByteArray(argv[1])=="--self-test"){
   QCoreApplication app(argc,argv);

@@ -9,14 +9,15 @@ New-Item -ItemType Directory -Path (Join-Path $payload 'ascii-visor/bin/64bit'),
 Copy-Item -LiteralPath (Join-Path $PluginRoot 'build/ascii-visor.dll') -Destination (Join-Path $payload 'ascii-visor/bin/64bit')
 Copy-Item -LiteralPath (Join-Path $PluginRoot 'data/visor.effect') -Destination (Join-Path $payload 'ascii-visor/data')
 Copy-Item -LiteralPath (Join-Path $PluginRoot 'data/locale') -Destination (Join-Path $payload 'ascii-visor/data') -Recurse
-foreach($font in @('BetterVCR.ttf','BetterVCR-OFL.txt','NotoSansMonoCJKjp-Regular.otf','Noto-OFL.txt')){
+foreach($font in @('BetterVCR.ttf','BetterVCR-OFL.txt','NotoSansMonoCJKjp-Regular.otf','Noto-OFL.txt','PixelMplus12-Bold.ttf','PixelMplus-LICENSE.txt','PixelMplus-README.md')){
  Copy-Item -LiteralPath (Join-Path $PluginRoot ('data/fonts/'+$font)) -Destination (Join-Path $payload 'ascii-visor/data/fonts')
 }
+Copy-Item -LiteralPath (Join-Path $PluginRoot 'THIRD_PARTY.md') -Destination (Join-Path $payload 'ascii-visor')
 Copy-Item -LiteralPath (Join-Path $PluginRoot 'LICENSE') -Destination (Join-Path $payload 'ascii-visor')
 $files=Get-ChildItem -LiteralPath (Join-Path $payload 'ascii-visor') -Recurse -File | ForEach-Object {
  [pscustomobject]@{path=$_.FullName.Substring($payload.Length+1).Replace('\','/');sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
 }
-[pscustomobject]@{version='0.2.8';files=@($files)} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding UTF8
+[pscustomobject]@{version='0.3.1-rc1';files=@($files)} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding UTF8
 Compress-Archive -Path (Join-Path $payload '*') -DestinationPath (Join-Path $PSScriptRoot 'payload.zip') -Force
 Push-Location $PSScriptRoot
 try {
@@ -26,7 +27,7 @@ try {
  }
  & "$CompilerRoot/windres.exe" -i setup.rc -o setup-res.o
  if($LASTEXITCODE){throw 'Resource compilation failed'}
- & "$CompilerRoot/clang.exe" -O2 -Wall -Wextra -municode -mwindows bootstrap.c setup-res.o -luser32 -o ASCII-VISOR-0.2.8-Setup.exe
+ & "$CompilerRoot/clang.exe" -O2 -Wall -Wextra -municode -mwindows bootstrap.c setup-res.o -luser32 -o ASCII-VISOR-0.3.1-rc1-Setup.exe
  if($LASTEXITCODE){throw 'Installer compilation failed'}
- Write-Host 'Built ASCII-VISOR-0.2.8-Setup.exe'
+ Write-Host 'Built ASCII-VISOR-0.3.1-rc1-Setup.exe'
 } finally{Pop-Location}
