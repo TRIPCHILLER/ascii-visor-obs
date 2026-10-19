@@ -1,0 +1,130 @@
+name: Cross-platform release candidate
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OBS SDK and graphics test tools
+        run: |
+          sudo add-apt-repository --yes ppa:obsproject/obs-studio
+          sudo apt-get update
+          sudo apt-get install -y obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils qt6-base-dev qt6-wayland weston libx11-dev
+      - run: cmake --preset ubuntu-x86_64 -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
+      - run: cmake --build --preset ubuntu-x86_64 --parallel 4
+      - run: ctest --test-dir build_x86_64 --output-on-failure
+      - name: Render and compositing regression tests
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p test-results
+          xvfb-run -a ./build_x86_64/visor-transparency-test "$PWD" "$PWD/test-results/composite" /usr
+      - name: Package preview
+        run: |
+          mkdir -p preview/ascii-visor/bin/64bit
+          cp build_x86_64/ascii-visor.so preview/ascii-visor/bin/64bit/
+          cp -R data preview/ascii-visor/data
+          cp LICENSE THIRD_PARTY.md preview/
+          tar -C preview -czf ascii-visor-linux-x86_64-preview.tar.gz .
+          ldd build_x86_64/ascii-visor.so
+          mkdir -p preview/setup
+          cp 'build_x86_64/installer/native/ASCII VISOR Setup' preview/setup/
+          python3 installer/native/package.py preview/setup preview/ascii-visor
+          QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --preview test-results/installer
+          QT_QPA_PLATFORM=offscreen 'preview/setup/ASCII VISOR Setup' --self-test
+          tar -C preview/setup -czf ascii-visor-linux-setup-preview.tar.gz .
+          bash installer/native/appimage.sh
+      - name: Name candidate downloads
+        run: |
+          mkdir -p release-files
+          cp ascii-visor-linux-setup-preview.AppImage release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.AppImage
+          cp ascii-visor-linux-setup-preview.tar.gz release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz
+          cp ascii-visor-linux-x86_64-preview.tar.gz release-files/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Plugin.tar.gz
+          (cd release-files && sha256sum * > SHA256SUMS-linux.txt)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ascii-visor-0.3.1-rc1-linux-x86_64
+          path: release-files/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-test-results
+          path: test-results/
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake --preset macos -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
+      - run: cmake --build --preset macos --parallel 4
+        id: compile
+      - run: ctest --test-dir build_macos -C RelWithDebInfo --output-on-failure
+      - name: Test actual OBS 32.2.2 rendering on native CPU
+        run: |
+          variant=Apple
+          if [[ "$RUNNER_ARCH" == X64 ]]; then variant=Intel; fi
+          curl -fL --retry 3 "https://github.com/obsproject/obs-studio/releases/download/32.2.2/OBS-Studio-32.2.2-macOS-${variant}.dmg" -o obs.dmg
+          hdiutil attach obs.dmg -nobrowse -mountpoint "$PWD/obs-volume"
+          ditto "$PWD/obs-volume/OBS.app" "$PWD/obs-runtime/OBS.app"
+          hdiutil detach "$PWD/obs-volume"
+          find obs-runtime/OBS.app -iname '*opengl*' -o -name default.effect
+          mkdir -p test-results
+          export DYLD_FRAMEWORK_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
+          export DYLD_LIBRARY_PATH="$PWD/obs-runtime/OBS.app/Contents/Frameworks"
+          export VISOR_TEST_GRAPHICS="$PWD/obs-runtime/OBS.app/Contents/Frameworks/libobs-opengl.dylib"
+          export VISOR_TEST_OBSDATA=$(dirname "$(find "$PWD/obs-runtime/OBS.app" -name default.effect -print -quit)")
+          test -f "$VISOR_TEST_GRAPHICS"
+          ./build_macos/RelWithDebInfo/visor-transparency-test "$PWD" "$PWD/test-results/composite" "$PWD/obs-runtime/OBS.app"
+      - name: Inspect and package universal preview
+        id: package
+        if: ${{ !cancelled() && steps.compile.conclusion == 'success' }}
+        run: |
+          bundle=build_macos/RelWithDebInfo/ascii-visor.plugin
+          test -d "$bundle"
+          lipo "$bundle/Contents/MacOS/ascii-visor" -verify_arch arm64 x86_64
+          codesign --verify --deep --strict "$bundle"
+          otool -L "$bundle/Contents/MacOS/ascii-visor"
+          ditto -c -k --keepParent "$bundle" ascii-visor-macos-universal-preview.zip
+          app='build_macos/installer/native/RelWithDebInfo/ASCII VISOR Setup.app'
+          test -d "$app"
+          deploy=build_macos/installer/native/RelWithDebInfo/visor-macdeployqt
+          test -x "$deploy"
+          qtcore=$(find "$PWD/.deps" -path '*/lib/QtCore.framework' -type d -print -quit)
+          test -n "$qtcore"
+          DYLD_FRAMEWORK_PATH="$(dirname "$qtcore")" "$deploy" "$app" -always-overwrite -libpath="$(dirname "$qtcore")" -verbose=2
+          codesign --force --deep --sign - "$app"
+          python3 installer/native/package.py "$app/Contents/Resources" "$bundle"
+          codesign --force --sign - "$app"
+          codesign --verify --deep --strict "$app"
+          lipo "$app/Contents/MacOS/ASCII VISOR Setup" -verify_arch arm64 x86_64
+          "$app/Contents/MacOS/ASCII VISOR Setup" --preview test-results/installer
+          "$app/Contents/MacOS/ASCII VISOR Setup" --self-test
+          ditto -c -k --keepParent "$app" ascii-visor-macos-setup-preview.zip
+      - name: Name candidate downloads
+        if: ${{ !cancelled() && steps.package.conclusion == 'success' }}
+        run: |
+          mkdir -p release-files
+          cp ascii-visor-macos-setup-preview.zip release-files/ASCII-VISOR-0.3.1-rc1-macOS-universal-Setup.zip
+          cp ascii-visor-macos-universal-preview.zip release-files/ASCII-VISOR-0.3.1-rc1-macOS-universal-Plugin.zip
+          (cd release-files && shasum -a 256 * > SHA256SUMS-macos.txt)
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() && steps.package.conclusion == 'success' }}
+        with:
+          name: ascii-visor-0.3.1-rc1-macos-universal-${{ matrix.os }}
+          path: release-files/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-test-results-${{ matrix.os }}
+          path: test-results/

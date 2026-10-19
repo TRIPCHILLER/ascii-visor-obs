@@ -10,3 +10,7 @@ __pycache__/
 /installer/payload-build-*/
 /installer/extracted-*/
 /installer/tests-*/
+/build_*/
+/.deps/
+/preview/
+/release/
