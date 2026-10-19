@@ -1,0 +1,26 @@
+name: Download links and documentation
+on:
+  push:
+    paths:
+      - 'docs/download/**'
+      - 'tests/download-selector.cjs'
+      - 'docs/INSTALL.*.md'
+      - 'README*.md'
+      - '.github/workflows/documentation.yml'
+  pull_request:
+    paths:
+      - 'docs/download/**'
+      - 'tests/download-selector.cjs'
+      - 'docs/INSTALL.*.md'
+      - 'README*.md'
+      - '.github/workflows/documentation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  download-selection:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: node tests/download-selector.cjs

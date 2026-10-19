@@ -8,11 +8,11 @@
 
 <p align="center"><a href="README.md"><img src="docs/media/flags/us.svg" width="24" height="16" alt="US"> English</a> · <a href="README.ru.md"><img src="docs/media/flags/ru.svg" width="24" height="16" alt="RU"> Русский</a> · <a href="README.es.md"><img src="docs/media/flags/es.svg" width="24" height="16" alt="ES"> Español</a> · <a href="README.pt-BR.md"><img src="docs/media/flags/br.svg" width="24" height="16" alt="BR"> Português (Brasil)</a> · <a href="README.de.md"><img src="docs/media/flags/de.svg" width="24" height="16" alt="DE"> Deutsch</a> · <a href="README.fr.md"><img src="docs/media/flags/fr.svg" width="24" height="16" alt="FR"> Français</a> · <a href="README.ja.md"><img src="docs/media/flags/jp.svg" width="24" height="16" alt="JP"> 日本語</a> · <b><img src="docs/media/flags/kr.svg" width="24" height="16" alt="KR"> 한국어</b> · <a href="README.zh-CN.md"><img src="docs/media/flags/cn.svg" width="24" height="16" alt="CN"> 简体中文</a> · <a href="README.zh-TW.md"><img src="docs/media/flags/tw.svg" width="24" height="16" alt="TW"> 繁體中文</a></p>
 
-<p align="center"><b>Windows · Linux · macOS · 0.3.1-rc1</b></p>
+<p align="center"><b>Windows · Linux · macOS</b></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Windows-x64-Setup.exe"><img src="docs/media/download-0.svg" width="220" height="58" alt="다운로드 · Windows x64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.AppImage"><img src="docs/media/download-1.svg" width="220" height="58" alt="다운로드 · Linux x86_64"></a> &nbsp; <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-macOS-universal-Setup.zip"><img src="docs/media/download-2.svg" width="220" height="58" alt="다운로드 · macOS · Apple Silicon + Intel"></a></p>
+<p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=en"><img src="docs/media/download-0.svg" width="220" height="58" alt="다운로드 · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=en"><img src="docs/media/download-1.svg" width="220" height="58" alt="다운로드 · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=en"><img src="docs/media/download-2.svg" width="220" height="58" alt="다운로드 · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center">0.3.1-rc1은 출시 후보 버전입니다. 다운로드 링크는 릴리스 게시 후 사용할 수 있습니다. <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.2.8">0.2.8 · Windows</a></p>
+<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 

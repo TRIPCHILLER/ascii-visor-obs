@@ -12,7 +12,7 @@ Turn your camera and video into live character art inside OBS Studio. This relea
 
 Close OBS before installing. On macOS unzip and open **ASCII VISOR Setup.app**; on Linux allow execution of the AppImage. Then open OBS → source → **Filters → Effect Filters → + → ASCII ⛶ VISOR**.
 
-[Installation guide](https://github.com/TRIPCHILLER/ascii-visor-obs/blob/feature/cross-platform-obs/docs/INSTALL.en.md) · [Инструкция на русском](https://github.com/TRIPCHILLER/ascii-visor-obs/blob/feature/cross-platform-obs/docs/INSTALL.ru.md)
+[Installation guide](https://github.com/TRIPCHILLER/ascii-visor-obs/blob/v0.3.1-rc1/docs/INSTALL.en.md) · [Инструкция на русском](https://github.com/TRIPCHILLER/ascii-visor-obs/blob/v0.3.1-rc1/docs/INSTALL.ru.md)
 
 ## What changed
 
