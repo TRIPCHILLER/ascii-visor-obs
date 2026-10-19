@@ -12,7 +12,7 @@
 
 <p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=en"><img src="docs/media/download-0.svg" width="220" height="58" alt="ダウンロード · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=en"><img src="docs/media/download-1.svg" width="220" height="58" alt="ダウンロード · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=en"><img src="docs/media/download-2.svg" width="220" height="58" alt="ダウンロード · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
+<p align="center"><a href="docs/INSTALL.en.md">インストール</a> · <a href="#examples">使用例</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose">不具合を報告</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">リリース</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -35,6 +35,8 @@ ASCIIアバターは、VTuber風の配信表現の選択肢にもなります。
 | **OBS内で操作** | 通常のフィルター画面から操作し、録画や配信に使用。 |
 
 密度は**横幅30〜150文字**。文字セットとパレットは自由に組み合わせられます。
+
+<a name="examples"></a>
 
 ### 🎨 カラースタイル
 

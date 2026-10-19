@@ -1,5 +1,3 @@
-# ASCII VISOR 0.3.1-rc1 — Windows, Linux & macOS
-
 Turn your camera and video into live character art inside OBS Studio. This release candidate brings the approved PIXEL, DOTS and Katakana improvements to all three platforms, with graphical installers and ten interface languages.
 
 ## Download
@@ -42,4 +40,3 @@ This is a **pre-release** for wider testing. [Report an issue](https://github.co
 - GitHub **Source code** archives — for developers; not installers.
 
 </details>
-

@@ -12,7 +12,7 @@
 
 <p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=en"><img src="docs/media/download-0.svg" width="220" height="58" alt="다운로드 · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=en"><img src="docs/media/download-1.svg" width="220" height="58" alt="다운로드 · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=en"><img src="docs/media/download-2.svg" width="220" height="58" alt="다운로드 · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
+<p align="center"><a href="docs/INSTALL.en.md">설치</a> · <a href="#examples">예시</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose">문제 신고</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">릴리스</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -35,6 +35,8 @@ ASCII 아바타는 VTuber 스타일의 방송 표현을 위한 또 다른 선택
 | **OBS 안에서 사용** | 기본 필터 창에서 조절하고 녹화와 방송에 사용합니다. |
 
 밀도는**가로 30~150문자**입니다. 문자 세트와 팔레트는 자유롭게 조합할 수 있습니다.
+
+<a name="examples"></a>
 
 ### 🎨 색상 스타일
 

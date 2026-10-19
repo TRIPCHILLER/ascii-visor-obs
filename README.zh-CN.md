@@ -12,7 +12,7 @@
 
 <p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=en"><img src="docs/media/download-0.svg" width="220" height="58" alt="下载 · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=en"><img src="docs/media/download-1.svg" width="220" height="58" alt="下载 · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=en"><img src="docs/media/download-2.svg" width="220" height="58" alt="下载 · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
+<p align="center"><a href="docs/INSTALL.en.md">安装</a> · <a href="#examples">示例</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose">报告问题</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">版本发布</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -35,6 +35,8 @@ ASCII 头像也是一种类似 VTuber 的出镜方式：用风格化形象代替
 | **直接在 OBS 中使用** | 通过标准滤镜面板调整，并用于录制和直播。 |
 
 密度范围为**横向30到150个字符**。字符集与配色方案可独立选择、自由组合。
+
+<a name="examples"></a>
 
 ### 🎨 配色风格
 

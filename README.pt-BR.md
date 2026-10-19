@@ -12,7 +12,7 @@
 
 <p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=en"><img src="docs/media/download-0.svg" width="220" height="58" alt="Baixar · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=en"><img src="docs/media/download-1.svg" width="220" height="58" alt="Baixar · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=en"><img src="docs/media/download-2.svg" width="220" height="58" alt="Baixar · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
+<p align="center"><a href="docs/INSTALL.en.md">Instalação</a> · <a href="#examples">Exemplos</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose">Relatar um problema</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Versões</a></p>
 
 ![ASCII ⛶ VISOR](docs/media/ascii_visor_preview.png)
 
@@ -35,6 +35,8 @@ Um avatar ASCII também é uma alternativa à apresentação no estilo VTuber: m
 | **Dentro do OBS** | Controle o efeito pelo painel Filtros e use em gravações e transmissões. |
 
 Densidade de **30 a 150 caracteres na largura**. Conjuntos e paletas podem ser combinados livremente.
+
+<a name="examples"></a>
 
 ### 🎨 Estilos de cor
 

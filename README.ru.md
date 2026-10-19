@@ -18,7 +18,7 @@
 
 <p align="center"><a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=windows&amp;lang=ru"><img src="docs/media/download-0.svg" width="220" height="58" alt="Скачать · Windows x64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=linux&amp;lang=ru"><img src="docs/media/download-1.svg" width="220" height="58" alt="Скачать · Linux x86_64"></a> &nbsp; <a href="https://tripchiller.github.io/ascii-visor-obs/download/?platform=macos&amp;lang=ru"><img src="docs/media/download-2.svg" width="220" height="58" alt="Скачать · macOS · Apple Silicon + Intel"></a></p>
 
-<p align="center"><a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Releases</a></p>
+<p align="center"><a href="docs/INSTALL.ru.md">Установка</a> · <a href="#examples">Примеры</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose">Сообщить о проблеме</a> · <a href="https://github.com/TRIPCHILLER/ascii-visor-obs/releases">Релизы</a></p>
 
 ![Камера с эффектом ASCII VISOR](docs/media/ascii_visor_preview.png)
 
@@ -41,6 +41,8 @@ _*Это даёт частичную визуальную приватность
 | **Работа прямо в OBS** | Управлять эффектом из привычного окна фильтров и использовать его в записи и трансляции. |
 
 Плотность регулируется от **30 до 150 символов по ширине**. Наборы символов и цветовые палитры выбираются независимо: их можно комбинировать.
+
+<a name="examples"></a>
 
 ### 🎨 Цветовые стили
 
