@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="58" viewBox="0 0 220 58"><rect x="1" y="1" width="218" height="56" rx="9" fill="#16232d" stroke="#87cafa" stroke-width="2"/><path d="M23 19v14m-5-5 5 5 5-5M16 38h14" fill="none" stroke="#87cafa" stroke-width="2"/><text x="42" y="25" fill="#ffffff" font-family="Arial,sans-serif" font-size="17" font-weight="bold">Windows</text><text x="42" y="43" fill="#c4dbea" font-family="Arial,sans-serif" font-size="12">x64 · Setup.exe</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="58" viewBox="0 0 220 58">
+  <title>Windows x64</title>
+  <rect x="1" y="1" width="218" height="56" rx="9" fill="#16232d" stroke="#87cafa" stroke-width="2"/>
+  <g fill="#9cd7ff">
+    <path d="M12 18h10v10H12zM24 18h10v10H24zM12 30h10v10H12zM24 30h10v10H24z"/>
+  </g>
+  <text x="42" y="25" fill="#ffffff" font-family="Arial,sans-serif" font-size="17" font-weight="bold">Windows</text>
+  <text x="42" y="43" fill="#c4dbea" font-family="Arial,sans-serif" font-size="12">x64 · Setup.exe</text>
+</svg>
