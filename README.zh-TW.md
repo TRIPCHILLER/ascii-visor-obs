@@ -74,6 +74,8 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 [安裝指南](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>手動安裝與其他壓縮檔</summary>
 
@@ -131,6 +133,6 @@ ASCII ⛶ VISOR · OBS Edition 是**免費開源外掛**，所有功能均無需
 
 ## 📄 授權條款
 
-外掛：**GPL-2.0-or-later**。字型：**SIL Open Font License**。參見 [LICENSE](LICENSE) 和 [THIRD_PARTY.md](THIRD_PARTY.md)。
+外掛：**GPL-2.0-or-later**。字型：**SIL Open Font License / M+**。參見 [LICENSE](LICENSE) 和 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
 ASCII ⛶ VISOR · OBS Edition 是 [TRIPCHILLER](https://github.com/TRIPCHILLER) 開發的獨立社群專案，並非 OBS Project 官方產品。

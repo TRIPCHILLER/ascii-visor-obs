@@ -74,6 +74,8 @@ Escolha seu sistema acima. Feche o OBS, execute o instalador e abra OBS → font
 
 [Guia de instalação](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>Instalação manual e outros pacotes</summary>
 
@@ -131,6 +133,6 @@ Tem uma ideia ou encontrou um problema? Escolha o formulário e conte o que melh
 
 ## 📄 Licenças
 
-Plugin: **GPL-2.0-or-later**. Fontes: **SIL Open Font License**. Veja [LICENSE](LICENSE) e [THIRD_PARTY.md](THIRD_PARTY.md).
+Plugin: **GPL-2.0-or-later**. Fontes: **SIL Open Font License / M+**. Veja [LICENSE](LICENSE) e [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ASCII ⛶ VISOR · OBS Edition é um projeto independente de [TRIPCHILLER](https://github.com/TRIPCHILLER), não um produto oficial do OBS Project.

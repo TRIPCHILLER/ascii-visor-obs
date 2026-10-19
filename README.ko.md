@@ -74,6 +74,8 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 [설치 안내](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>수동 설치 및 추가 패키지</summary>
 
@@ -131,6 +133,6 @@ ASCII ⛶ VISOR · OBS Edition은 **무료 오픈 소스 플러그인**입니다
 
 ## 📄 라이선스
 
-플러그인: **GPL-2.0-or-later**. 글꼴: **SIL Open Font License**. [LICENSE](LICENSE)와 [THIRD_PARTY.md](THIRD_PARTY.md)를 참고하세요.
+플러그인: **GPL-2.0-or-later**. 글꼴: **SIL Open Font License / M+**. [LICENSE](LICENSE)와 [THIRD_PARTY.md](THIRD_PARTY.md)를 참고하세요.
 
 ASCII ⛶ VISOR · OBS Edition은 [TRIPCHILLER](https://github.com/TRIPCHILLER)의 독립적인 커뮤니티 프로젝트이며 OBS Project의 공식 제품이 아닙니다.

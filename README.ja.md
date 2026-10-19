@@ -74,6 +74,8 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 [インストールガイド](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>手動インストールと追加パッケージ</summary>
 
@@ -131,6 +133,6 @@ ASCII ⛶ VISOR · OBS Editionは**無料のオープンソースプラグイン
 
 ## 📄 ライセンス
 
-プラグイン：**GPL-2.0-or-later**。フォント：**SIL Open Font License**。[LICENSE](LICENSE)、[THIRD_PARTY.md](THIRD_PARTY.md)を参照してください。
+プラグイン：**GPL-2.0-or-later**。フォント：**SIL Open Font License / M+**。[LICENSE](LICENSE)、[THIRD_PARTY.md](THIRD_PARTY.md)を参照してください。
 
 ASCII ⛶ VISOR · OBS Editionは[TRIPCHILLER](https://github.com/TRIPCHILLER)による独立したコミュニティプロジェクトであり、OBS Projectの公式製品ではありません。

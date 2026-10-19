@@ -74,6 +74,8 @@ Choose your platform above. Close OBS, run the installer, then open OBS → sour
 
 [Installation guide](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>Manual installation and alternative packages</summary>
 
@@ -131,6 +133,6 @@ A [GitHub](https://github.com/) account is required to submit. The **Ideas and b
 
 ## 📄 Licenses
 
-Plugin: **GPL-2.0-or-later**. Fonts: **SIL Open Font License**. See [LICENSE](LICENSE) and [THIRD_PARTY.md](THIRD_PARTY.md).
+Plugin: **GPL-2.0-or-later**. Fonts: **SIL Open Font License / M+**. See [LICENSE](LICENSE) and [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ASCII ⛶ VISOR · OBS Edition is an independent community project by [TRIPCHILLER](https://github.com/TRIPCHILLER), not an official OBS Project product.

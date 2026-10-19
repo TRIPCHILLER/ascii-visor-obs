@@ -80,6 +80,8 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 [Инструкция по установке](docs/INSTALL.ru.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>Ручная установка и дополнительные архивы</summary>
 
@@ -137,6 +139,6 @@ ASCII ⛶ VISOR · OBS Edition — **бесплатный плагин с отк
 
 ## 📄 Лицензии
 
-Плагин распространяется под **GPL-2.0-or-later**, шрифты — под **SIL Open Font License**. Подробнее: [LICENSE](LICENSE) и [THIRD_PARTY.md](THIRD_PARTY.md).
+Плагин распространяется под **GPL-2.0-or-later**, шрифты — под **SIL Open Font License / M+**. Подробнее: [LICENSE](LICENSE) и [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ASCII ⛶ VISOR · OBS Edition — независимый проект сообщества, созданный [TRIPCHILLER](https://github.com/TRIPCHILLER). Он не является официальным продуктом OBS Project.

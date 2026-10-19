@@ -74,6 +74,8 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 [安装指南](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
+https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
+
 <details>
 <summary>手动安装和其他压缩包</summary>
 
@@ -131,6 +133,6 @@ ASCII ⛶ VISOR · OBS Edition 是**免费开源插件**，所有功能均无需
 
 ## 📄 许可证
 
-插件：**GPL-2.0-or-later**。字体：**SIL Open Font License**。参见 [LICENSE](LICENSE) 和 [THIRD_PARTY.md](THIRD_PARTY.md)。
+插件：**GPL-2.0-or-later**。字体：**SIL Open Font License / M+**。参见 [LICENSE](LICENSE) 和 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
 ASCII ⛶ VISOR · OBS Edition 是 [TRIPCHILLER](https://github.com/TRIPCHILLER) 开发的独立社区项目，并非 OBS Project 官方产品。
