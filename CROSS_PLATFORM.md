@@ -121,7 +121,9 @@ release. FreeType's FTL notice is included with installer resources.
 2. Repeat on both a real Apple Silicon Mac and an Intel Mac. A universal binary
    architecture check alone does not establish rendering on both CPUs.
 3. Test Linux Wayland, Flatpak runtime matching and at least one additional
-   distribution. The Ubuntu/Xvfb test does not cover all Linux GPU drivers.
+   distribution. AppImage CI now opens the packaged wizard on both Xvfb/X11
+   and headless Weston/Wayland (with DISPLAY unset), including automatic
+   platform selection. This does not cover all desktop compositors or GPU drivers.
 4. Review all ten installer language screenshots and test fresh install,
    upgrade, backup restore and optional launching in interactive OBS sessions.
 5. Sign/notarize Mac release packages, pin deployment tools, include license
@@ -129,3 +131,28 @@ release. FreeType's FTL notice is included with installer resources.
 
 No camera, personal media, real OBS profile, or production installation is used
 by the synthetic rendering and installer filesystem tests.
+
+## Linux beta feedback and packaging correction (2026-10-19)
+
+An Arch-based Wayland tester reported successful plugin rendering and settings,
+manual tar installation, and GUI installation after forcing `QT_QPA_PLATFORM=xcb`.
+Their report: https://github.com/TRIPCHILLER/ascii-visor-obs/pull/1#issuecomment-6253660742
+This establishes one successful user environment, not universal Arch/Flatpak support.
+
+The original AppImage contained only the xcb platform plugin: linuxdeploy's Qt
+plugin deploys that backend by default. It therefore aborted when the desktop
+requested Wayland. Installing host Qt plugins is not a reliable repair for a
+self-contained AppImage because their Qt ABI may differ from the bundled Qt.
+
+Packaging now explicitly includes qt6-wayland's generic/EGL client platforms,
+shell/decoration/graphics integrations and their dependencies. No global xcb
+override is applied, so pure Wayland sessions do not require XWayland. Upstream
+deployment configuration: https://github.com/linuxdeploy/linuxdeploy-plugin-qt
+The wizard's version and filesystem self-test paths use no GUI application.
+
+Remaining beta boundaries: glibc baseline is Ubuntu 24.04 (older distributions
+need another build), x86_64 only, actual Flatpak runtime ABI matching, compositor
+and fractional scaling differences, plus native/Steam installation locations.
+The filter itself does not link Qt; the AppImage Qt fix concerns the installer.
+Retest the new AppImage on the original tester's desktop before calling this
+specific user's failure resolved.

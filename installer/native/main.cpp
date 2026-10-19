@@ -231,6 +231,19 @@ static void testInstall(const QString &resources){
  qInfo("Installer self-test: fresh install, upgrade backup and corrupt payload rejection PASS");
 }
 int main(int argc,char **argv){
+ // Diagnostics must work even on a machine without a graphical session.
+ if(argc==2&&QByteArray(argv[1])=="--version"){
+  qInfo("ASCII VISOR Setup 0.3.0-preview");return 0;
+ }
+ if(argc==2&&QByteArray(argv[1])=="--self-test"){
+  QCoreApplication app(argc,argv);
+  QString root=QCoreApplication::applicationDirPath();
+#ifdef Q_OS_MACOS
+  root=QDir(root+"/../Resources").absolutePath();
+#endif
+  try{testInstall(root);return 0;}
+  catch(const std::exception &e){qCritical("%s",e.what());return 1;}
+ }
  QApplication app(argc,argv);app.setStyle("Fusion");
  QString root=QCoreApplication::applicationDirPath();
 #ifdef Q_OS_MACOS
@@ -244,9 +257,9 @@ int main(int argc,char **argv){
 #endif
  QFontDatabase::addApplicationFont(fontRoot+"NotoSansMonoCJKjp-Regular.otf");
  try{
-  if(argc==2&&QString::fromLocal8Bit(argv[1])=="--self-test"){testInstall(root);return 0;}
   Setup window(root);window.show();
   if(argc==3&&QString::fromLocal8Bit(argv[1])=="--preview"){
+   qInfo("Installer display platform: %s",qPrintable(QGuiApplication::platformName()));
    QTimer::singleShot(200,&app,[&]{window.preview(QString::fromLocal8Bit(argv[2]));app.quit();});
   }
   return app.exec();}

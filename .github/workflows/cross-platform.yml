@@ -14,7 +14,7 @@ jobs:
         run: |
           sudo add-apt-repository --yes ppa:obsproject/obs-studio
           sudo apt-get update
-          sudo apt-get install -y obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils qt6-base-dev libx11-dev
+          sudo apt-get install -y obs-studio ninja-build libsimde-dev libgles2-mesa-dev xvfb mesa-utils qt6-base-dev qt6-wayland weston libx11-dev
       - run: cmake --preset ubuntu-x86_64 -DENABLE_QT=ON -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF
       - run: cmake --build --preset ubuntu-x86_64 --parallel 4
       - run: ctest --test-dir build_x86_64 --output-on-failure
