@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 快速开始
 
-在上方选择系统。关闭 OBS，运行安装程序，然后打开 OBS → 来源 → 滤镜 → 效果滤镜 → + → ASCII ⛶ VISOR。
+在上方选择系统，关闭 OBS 并运行安装程序。随后打开 OBS，选择视频源并按以下顺序操作：**在预览中右键点击所选源的画面 → 滤镜 → +（加号图标）→ ASCII ⛶ VISOR**。
 
 [安装指南](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## 帮助
+
+<details>
+<summary>找不到滤镜？</summary>
+
+请完全重启 OBS 并选择视频源，然后按以下顺序操作：**在预览中右键点击所选源的画面 → 滤镜 → +（加号图标）→ ASCII ⛶ VISOR**。 如果列表中没有 ASCII VISOR，请[报告问题](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose)并提供操作系统和 OBS 版本。
+
+</details>
+
+<details>
+<summary>更新插件</summary>
+
+关闭 OBS，通过对应系统的按钮下载最新安装程序，并选择原来的安装位置。**无需卸载旧版本：**新版本会直接覆盖并更新插件文件。OBS 的场景和配置文件会保留。
+
+</details>
+
+<details>
+<summary>如何删除插件？</summary>
+
+关闭 OBS，按照[对应系统的安装指南](docs/INSTALL.en.md)中的删除步骤操作。只删除插件，OBS 本体及其设置会保留。
 
 </details>
 

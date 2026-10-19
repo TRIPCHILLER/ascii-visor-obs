@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Démarrage rapide
 
-Choisissez votre système ci-dessus. Fermez OBS, lancez l’installateur, puis ouvrez OBS → source → Filtres → Filtres d’effet → + → ASCII ⛶ VISOR.
+Choisissez votre système ci-dessus. Fermez OBS et lancez l’installateur. Ouvrez ensuite OBS et sélectionnez votre source vidéo : **clic droit sur l’image de la source sélectionnée dans l’aperçu → Filtres → + (icône plus) → ASCII ⛶ VISOR**.
 
 [Guide d’installation](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Aide
+
+<details>
+<summary>Le filtre n’apparaît pas ?</summary>
+
+Redémarrez complètement OBS et sélectionnez votre source vidéo. Ensuite : **clic droit sur l’image de la source sélectionnée dans l’aperçu → Filtres → + (icône plus) → ASCII ⛶ VISOR**. Si ASCII VISOR manque dans la liste, [signalez le problème](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) avec votre système et la version d’OBS.
+
+</details>
+
+<details>
+<summary>Mettre à jour le plugin</summary>
+
+Fermez OBS, téléchargez l’installateur actuel avec le bouton de votre plateforme et choisissez le même emplacement. **Il n’est pas nécessaire de désinstaller l’ancienne version :** la nouvelle la met à jour sur place en remplaçant les fichiers du plugin. Les scènes et profils OBS sont conservés.
+
+</details>
+
+<details>
+<summary>Comment supprimer le plugin ?</summary>
+
+Fermez OBS et suivez la rubrique de suppression du [guide pour votre système](docs/INSTALL.en.md). Seul le plugin est supprimé ; OBS et ses réglages sont conservés.
 
 </details>
 

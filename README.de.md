@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Schnellstart
 
-Wähle oben dein System. Schließe OBS, starte den Installer und öffne danach OBS → Quelle → Filter → Effektfilter → + → ASCII ⛶ VISOR.
+Wähle oben dein System. Schließe OBS und starte den Installer. Öffne danach OBS und wähle die Videoquelle. Dann: **Rechtsklick auf das Bild der gewählten Quelle in der Vorschau → Filter → + (Pluszeichen) → ASCII ⛶ VISOR**.
 
 [Installationsanleitung](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Hilfe
+
+<details>
+<summary>Der Filter wird nicht angezeigt?</summary>
+
+Starte OBS vollständig neu und wähle die Videoquelle. Dann: **Rechtsklick auf das Bild der gewählten Quelle in der Vorschau → Filter → + (Pluszeichen) → ASCII ⛶ VISOR**. Fehlt ASCII VISOR in der Liste, [melde das Problem](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) mit Betriebssystem und OBS-Version.
+
+</details>
+
+<details>
+<summary>Plugin aktualisieren</summary>
+
+Schließe OBS, lade über die Schaltfläche deiner Plattform den aktuellen Installer herunter und wähle dasselbe Installationsziel. **Du musst die alte Version nicht deinstallieren:** die neue Version aktualisiert sie direkt und ersetzt die Plugin-Dateien. OBS-Szenen und Profile bleiben erhalten.
+
+</details>
+
+<details>
+<summary>Wie entferne ich das Plugin?</summary>
+
+Schließe OBS und folge dem Abschnitt zur Entfernung in der [Installationsanleitung für dein System](docs/INSTALL.en.md). Nur das Plugin wird entfernt; OBS und seine Einstellungen bleiben erhalten.
 
 </details>
 

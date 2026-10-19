@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Primeiros passos
 
-Escolha seu sistema acima. Feche o OBS, execute o instalador e abra OBS → fonte → Filtros → Filtros de efeito → + → ASCII ⛶ VISOR.
+Escolha seu sistema acima. Feche o OBS e execute o instalador. Depois abra o OBS e selecione a fonte de vídeo: **clique com o botão direito na imagem da fonte selecionada na prévia → Filtros → + (ícone de mais) → ASCII ⛶ VISOR**.
 
 [Guia de instalação](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Ajuda
+
+<details>
+<summary>O filtro não aparece?</summary>
+
+Reinicie o OBS completamente e selecione a fonte de vídeo. Depois: **clique com o botão direito na imagem da fonte selecionada na prévia → Filtros → + (ícone de mais) → ASCII ⛶ VISOR**. Se ASCII VISOR não aparecer na lista, [relate o problema](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) informando seu sistema e a versão do OBS.
+
+</details>
+
+<details>
+<summary>Atualização do plugin</summary>
+
+Feche o OBS, baixe o instalador atual pelo botão da sua plataforma e escolha o mesmo destino. **Não é necessário desinstalar a versão antiga:** a nova será instalada por cima, substituindo os arquivos do plugin. As cenas e os perfis do OBS serão preservados.
+
+</details>
+
+<details>
+<summary>Como remover o plugin?</summary>
+
+Feche o OBS e siga a seção de remoção do [guia para seu sistema](docs/INSTALL.en.md). Apenas o plugin será removido; o OBS e suas configurações permanecerão.
 
 </details>
 

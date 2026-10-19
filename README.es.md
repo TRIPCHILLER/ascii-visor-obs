@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Inicio rápido
 
-Elige tu sistema arriba. Cierra OBS, ejecuta el instalador y abre OBS → fuente → Filtros → Filtros de efecto → + → ASCII ⛶ VISOR.
+Elige tu sistema arriba. Cierra OBS y ejecuta el instalador. Después abre OBS y selecciona la fuente de vídeo: **clic derecho sobre la imagen de la fuente seleccionada en la vista previa → Filtros → + (icono de más) → ASCII ⛶ VISOR**.
 
 [Guía de instalación](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Ayuda
+
+<details>
+<summary>¿No aparece el filtro?</summary>
+
+Reinicia OBS por completo y selecciona la fuente de vídeo. Después: **clic derecho sobre la imagen de la fuente seleccionada en la vista previa → Filtros → + (icono de más) → ASCII ⛶ VISOR**. Si ASCII VISOR no aparece en la lista, [informa del problema](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) indicando tu sistema y versión de OBS.
+
+</details>
+
+<details>
+<summary>Actualizar el plugin</summary>
+
+Cierra OBS, descarga el instalador actual con el botón de tu plataforma y elige el mismo destino. **No es necesario desinstalar la versión anterior:** la nueva se instala encima y sustituye los archivos del plugin. Las escenas y los perfiles de OBS se conservan.
+
+</details>
+
+<details>
+<summary>¿Cómo desinstalo el plugin?</summary>
+
+Cierra OBS y sigue el apartado de desinstalación de la [guía para tu sistema](docs/INSTALL.en.md). Solo se elimina el plugin; OBS y su configuración se conservan.
 
 </details>
 

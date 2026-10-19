@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Quick start
 
-Choose your platform above. Close OBS, run the installer, then open OBS → source → Filters → Effect Filters → + → ASCII ⛶ VISOR.
+Choose your platform above. Close OBS and run the installer. Then open OBS and select your video source: **right-click its image in the preview → Filters → + (the plus icon) → ASCII ⛶ VISOR**.
 
 [Installation guide](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Help
+
+<details>
+<summary>Filter not showing up?</summary>
+
+Completely restart OBS and select your video source. Then: **right-click its image in the preview → Filters → + (the plus icon) → ASCII ⛶ VISOR**. If ASCII VISOR is missing from the list, [report an issue](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) with your OS and OBS version.
+
+</details>
+
+<details>
+<summary>Updating the plugin</summary>
+
+Close OBS, download the current installer using your platform’s button and choose the same installation destination. **You do not need to uninstall the old version:** the new installer updates it in place, replacing the plugin files. OBS scenes and profiles are preserved.
+
+</details>
+
+<details>
+<summary>How do I remove the plugin?</summary>
+
+Close OBS and follow the removal section of the [installation guide for your system](docs/INSTALL.en.md). Only the plugin is removed; OBS and its settings remain.
 
 </details>
 

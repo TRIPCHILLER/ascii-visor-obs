@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 クイックスタート
 
-上からOSを選び、OBSを終了してインストーラーを実行します。その後、OBS → ソース → フィルタ → エフェクトフィルタ → + → ASCII ⛶ VISOR を選択します。
+上でOSを選び、OBSを終了してインストーラーを実行します。その後OBSを起動し、映像ソースを選択して次の順に操作します：**プレビュー内の選択したソースの映像を右クリック →「フィルタ」→ +（プラスのアイコン）→ ASCII ⛶ VISOR**。
 
 [インストールガイド](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## ヘルプ
+
+<details>
+<summary>フィルターが表示されない場合</summary>
+
+OBSを完全に再起動し、映像ソースを選択してください。次の順に操作します：**プレビュー内の選択したソースの映像を右クリック →「フィルタ」→ +（プラスのアイコン）→ ASCII ⛶ VISOR**。 一覧にASCII VISORがない場合は、OSとOBSのバージョンを添えて[問題を報告](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose)してください。
+
+</details>
+
+<details>
+<summary>プラグインの更新</summary>
+
+OBSを終了し、お使いのOSのボタンから最新のインストーラーをダウンロードして、以前と同じ場所を選びます。**旧バージョンのアンインストールは不要です。**新しいバージョンがプラグインのファイルを上書きして更新します。OBSのシーンとプロファイルは保持されます。
+
+</details>
+
+<details>
+<summary>プラグインを削除するには</summary>
+
+OBSを終了し、[お使いのOSのインストールガイド](docs/INSTALL.en.md)の削除手順に従ってください。削除されるのはプラグインのみで、OBS本体と設定は保持されます。
 
 </details>
 

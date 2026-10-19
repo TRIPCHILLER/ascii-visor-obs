@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 快速開始
 
-在上方選擇系統。關閉 OBS，執行安裝程式，然後開啟 OBS → 來源 → 濾鏡 → 效果濾鏡 → + → ASCII ⛶ VISOR。
+在上方選擇系統，關閉 OBS 並執行安裝程式。接著開啟 OBS，選擇影像來源並依照以下順序操作：**在預覽中對所選來源的畫面按右鍵 → 濾鏡 → +（加號圖示）→ ASCII ⛶ VISOR**。
 
 [安裝指南](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## 說明
+
+<details>
+<summary>找不到濾鏡？</summary>
+
+請完全重新啟動 OBS 並選擇影像來源，再依照以下順序操作：**在預覽中對所選來源的畫面按右鍵 → 濾鏡 → +（加號圖示）→ ASCII ⛶ VISOR**。 如果清單中沒有 ASCII VISOR，請[回報問題](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose)並提供作業系統與 OBS 版本。
+
+</details>
+
+<details>
+<summary>更新外掛</summary>
+
+關閉 OBS，透過對應系統的按鈕下載最新安裝程式，並選擇原本的安裝位置。**不必移除舊版本：**新版本會直接覆寫並更新外掛檔案。OBS 的場景與設定檔會保留。
+
+</details>
+
+<details>
+<summary>如何移除外掛？</summary>
+
+關閉 OBS，按照[對應系統的安裝指南](docs/INSTALL.en.md)中的移除步驟操作。只移除外掛，OBS 本體及其設定會保留。
 
 </details>
 

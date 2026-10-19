@@ -72,7 +72,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 빠른 시작
 
-위에서 운영체제를 선택하세요. OBS를 종료하고 설치 프로그램을 실행한 뒤 OBS → 소스 → 필터 → 효과 필터 → + → ASCII ⛶ VISOR를 선택하세요.
+위에서 운영체제를 선택하세요. OBS를 종료하고 설치 프로그램을 실행한 뒤 OBS에서 영상 소스를 선택하세요. 다음 순서로 진행하세요: **미리보기에서 선택한 소스의 영상을 마우스 오른쪽 버튼으로 클릭 → 필터 → + (더하기 아이콘) → ASCII ⛶ VISOR**.
 
 [설치 안내](docs/INSTALL.en.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -87,6 +87,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## 도움말
+
+<details>
+<summary>필터가 보이지 않나요?</summary>
+
+OBS를 완전히 다시 시작하고 영상 소스를 선택하세요. 다음 순서로 진행하세요: **미리보기에서 선택한 소스의 영상을 마우스 오른쪽 버튼으로 클릭 → 필터 → + (더하기 아이콘) → ASCII ⛶ VISOR**. 목록에 ASCII VISOR가 없다면 운영체제와 OBS 버전을 적어 [문제를 신고](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose)해 주세요.
+
+</details>
+
+<details>
+<summary>플러그인 업데이트</summary>
+
+OBS를 종료하고 해당 운영체제 버튼에서 최신 설치 프로그램을 받은 뒤 이전과 같은 설치 위치를 선택하세요. **기존 버전을 삭제할 필요가 없습니다.** 새 버전이 플러그인 파일을 덮어써서 업데이트합니다. OBS 장면과 프로필은 유지됩니다.
+
+</details>
+
+<details>
+<summary>플러그인을 삭제하려면</summary>
+
+OBS를 종료하고 [운영체제별 설치 안내](docs/INSTALL.en.md)의 삭제 절차를 따르세요. 플러그인만 삭제되며 OBS와 설정은 유지됩니다.
 
 </details>
 

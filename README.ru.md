@@ -78,7 +78,7 @@ https://github.com/user-attachments/assets/7efa18ca-853b-4c0f-a8cb-d59d1732bf57
 
 ## 🚀 Быстрый старт
 
-Выберите свою систему выше. Закройте OBS, запустите установщик, затем откройте OBS → источник → Фильтры → Фильтры эффектов → + → ASCII ⛶ VISOR.
+Выберите свою систему выше. Закройте OBS и запустите установщик. Затем откройте OBS и выберите видеоисточник. Далее: **ПКМ по изображению выбранного источника в предпросмотре → «Фильтры» → + (значок плюса) → ASCII ⛶ VISOR**.
 
 [Инструкция по установке](docs/INSTALL.ru.md) · [Releases](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/tag/v0.3.1-rc1)
 
@@ -93,6 +93,31 @@ https://github.com/user-attachments/assets/6e653001-9286-4655-aad6-fa029b3f2180
 - [ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/ASCII-VISOR-0.3.1-rc1-Linux-x86_64-Setup.tar.gz)
 - [SHA256SUMS.txt](https://github.com/TRIPCHILLER/ascii-visor-obs/releases/download/v0.3.1-rc1/SHA256SUMS.txt)
 - Source code: GitHub ZIP / TAR.GZ
+
+</details>
+
+<a name="help"></a>
+
+## Помощь
+
+<details>
+<summary>Фильтр не появился?</summary>
+
+Полностью перезапустите OBS и выберите видеоисточник. Затем: **ПКМ по изображению выбранного источника в предпросмотре → «Фильтры» → + (значок плюса) → ASCII ⛶ VISOR**. Если ASCII VISOR отсутствует в списке, [сообщите о проблеме](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose), указав систему и версию OBS.
+
+</details>
+
+<details>
+<summary>Обновление плагина</summary>
+
+Закройте OBS, скачайте актуальный установщик кнопкой своей платформы и выберите прежнее место установки. **Удалять старую версию не обязательно:** новая установится поверх неё, заменив файлы плагина. Сцены и профили OBS сохранятся.
+
+</details>
+
+<details>
+<summary>Как удалить плагин?</summary>
+
+Закройте OBS и следуйте разделу удаления в [инструкции для вашей системы](docs/INSTALL.ru.md). Удаляется только плагин — сама OBS и её настройки остаются.
 
 </details>
 

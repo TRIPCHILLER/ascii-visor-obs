@@ -122,16 +122,37 @@ For manual installation, unzip `macOS-universal-Plugin.zip` and place `ascii-vis
 # ✨ Enable VISOR in OBS — all platforms
 
 1. Select your camera or another video source in **Sources**.
-2. Open its **Filters**.
-3. Under **Effect Filters**, select **+ → ASCII ⛶ VISOR**.
+2. **Right-click the selected source’s image in the preview → Filters**.
+3. Select **+ (the plus icon) → ASCII ⛶ VISOR**.
 4. Choose a character set and palette. Adjust density, contrast and gamma to suit your image.
 
 The effect appears in the preview and in recordings or streams. Use the eye icon to compare with the original video. Closing the filter window keeps the effect active, and settings are saved.
 
+The filter follows the OBS language. Restart OBS after changing language or installing the plugin. The installer language is selected separately.
+
 # Updates and help
 
-Open OBS → select a video source → **Filters → Effect Filters → + → ASCII ⛶ VISOR**. The filter follows the OBS language. Restart OBS after changing language or installing the plugin. The installer language is selected separately.
+<a name="help"></a>
 
-For updates, close OBS and rerun the installer for the same destination. If needed, use the wizard's previous-version restore option. For manual removal, close OBS and remove only the plugin folder/bundle described above (both files/directories for portable Windows), without deleting OBS settings or other plugins.
+<details>
+<summary>Filter not showing up?</summary>
 
-Verify downloads against `SHA256SUMS.txt`. GitHub's **Source code** ZIP and TAR.GZ contain source files, not ready-to-run installers. If the filter does not appear, include your OS, CPU, OBS version, installation type and OBS log when reporting the problem; do not include private keys or unrelated personal data.
+Completely restart OBS and select your video source. Then: **right-click its image in the preview → Filters → + (the plus icon) → ASCII ⛶ VISOR**. If ASCII VISOR is missing from the list, [report an issue](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) with your OS and OBS version.
+
+</details>
+
+<details>
+<summary>Updating the plugin</summary>
+
+Close OBS, download the current installer using your platform’s button and choose the same installation destination. **You do not need to uninstall the old version:** the new installer updates it in place, replacing the plugin files. OBS scenes and profiles are preserved.
+
+</details>
+
+<details>
+<summary>How do I remove the plugin?</summary>
+
+Close OBS and remove only the plugin folder or bundle at the path listed for your platform above. Portable Windows OBS needs both the plugin DLL and its data folder removed. Keep OBS, its settings, scenes and other plugins.
+
+</details>
+
+Verify downloads against `SHA256SUMS.txt`. GitHub **Source code** archives contain source files rather than installers.
