@@ -10,7 +10,7 @@
 
 <a name="windows"></a>
 
-# 🪟 Windows
+# Windows
 
 **Windows x64 · обычная, Steam и переносная OBS**
 
@@ -45,7 +45,7 @@
 
 <a name="linux"></a>
 
-# 🐧 Linux
+# Linux
 
 **Linux x86_64 · OBS 32.2+ · Ubuntu 24.04 / glibc 2.39 или новее**
 
@@ -82,7 +82,7 @@ AppImage содержит компоненты Qt для X11 и Wayland. Есл�
 
 <a name="macos"></a>
 
-# 🍎 macOS
+# macOS
 
 **Один universal-пакет для Apple Silicon и Intel**
 

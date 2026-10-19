@@ -10,7 +10,7 @@ The buttons below find the newest published installer for your platform. The dow
 
 <a name="windows"></a>
 
-# 🪟 Windows
+# Windows
 
 **Windows x64 · standard, Steam and portable OBS**
 
@@ -45,7 +45,7 @@ For manual installation, extract the `Windows-x64-Plugin.zip` package into a tem
 
 <a name="linux"></a>
 
-# 🐧 Linux
+# Linux
 
 **Linux x86_64 · OBS 32.2+ · Ubuntu 24.04 / glibc 2.39 or newer**
 
@@ -82,7 +82,7 @@ For manual installation, extract `Linux-x86_64-Plugin.tar.gz` and copy its compl
 
 <a name="macos"></a>
 
-# 🍎 macOS
+# macOS
 
 **One universal package for Apple Silicon and Intel**
 
