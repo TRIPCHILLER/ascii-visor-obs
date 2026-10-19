@@ -57,7 +57,7 @@ https://github.com/obsproject/obs-plugintemplate/wiki/Codesigning-On-macOS
 ## Rendering changes
 
 Katakana uses shared native pixel masks generated from PixelMplus12 Bold.
-Other text sets retain their baseline fonts. Windows retains private GDI fonts.
+Windows retains private GDI fonts.
 Linux/macOS use statically linked FreeType
 2.13.3 and the same bundled Better VCR and Noto fonts. Fonts are never installed
 system-wide. Unicode parsing accepts scalar values, deduplicates characters,
@@ -164,8 +164,6 @@ specific user's failure resolved.
 
 Only approved Katakana (PixelMplus12 Bold masks), procedural PIXEL and DOTS,
 legacy preset migration, and the localized custom input labels are updated.
-The original CLASSIC, NUMBERS, LATIN, CYRILLIC, BLOCKS and custom renderer are
-retained; experimental font, size and randomization changes are not included.
 PIXEL/DOTS have one menu entry each. The Katakana mask generator and font license
 are included. Original Windows rendering is compared against 40 GPU captures.
 

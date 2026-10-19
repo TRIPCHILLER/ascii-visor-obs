@@ -23,15 +23,13 @@ Close OBS before installing. On macOS unzip and open **ASCII VISOR Setup.app**; 
 - Renamed **Custom input** and clarified its prompt in all ten languages: up to 128 unique characters.
 - Linux installer includes X11 and Wayland components. macOS packages are universal, with the same localized wizard tested in the preceding preview.
 
-CLASSIC, NUMBERS, LATIN, CYRILLIC, BLOCKS and custom rendering keep their original font and behavior. Experimental size and randomization variants are not included.
-
 ## Compatibility
 
 - Windows x64: tested with OBS 32.2.2, standard/Steam/portable installation.
 - Linux x86_64: Ubuntu 24.04 / glibc 2.39 baseline, OBS 32.2+. Flatpak needs a compatible OBS runtime; older distributions may require a rebuild.
 - macOS: universal arm64 + x86_64; plugin target macOS 12+ and OBS 31.1+, subject to the higher requirements of OBS and bundled Qt. Packages have ad-hoc signatures, without Apple notarization. Use a per-app security exception if required; do not disable Gatekeeper globally.
 
-This is a **pre-release** for wider testing. Please report your OS, CPU, OBS version and installation type with any issue.
+This is a **pre-release** for wider testing. [Report an issue](https://github.com/TRIPCHILLER/ascii-visor-obs/issues/new/choose) and include your OS, CPU, OBS version and installation type.
 
 <details>
 <summary>Manual installation, alternative packages and checksums</summary>
@@ -45,11 +43,3 @@ This is a **pre-release** for wider testing. Please report your OS, CPU, OBS ver
 
 </details>
 
-<details>
-<summary>Что нового — на русском</summary>
-
-Новые PIXEL и DOTS с пятью размерами фигур и пустым фоном, более читаемая пиксельная катакана, единые названия без старых дублей и обновлённые подписи собственного ввода на десяти языках. Остальные наборы сохраняют прежний шрифт и логику.
-
-Сверху выберите установщик для своей системы. Для Mac нужен один universal-архив — он подходит и Apple Silicon, и Intel. Для Linux основной вариант — AppImage с поддержкой X11 и Wayland. В разделе Assets находятся также архивы ручной установки и контрольные суммы. Эта версия предназначена для проверки перед основным релизом.
-
-</details>
